@@ -1,35 +1,56 @@
 <template>
 
-<NavBar></NavBar>
-
+  <NavBar></NavBar>
+  <SideBar></SideBar>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
-import SideBar from '@/components/SideBar.vue';
-
-export default defineComponent({
-  name: 'DashBoardHome',
-  components: {
-    NavBar,
-    SideBar
-},
-});
-</script>
-
 <style scoped>
-    .dashboard{
-        display: grid;
-        grid-template-columns: 1fr 5fr;
-        background-color: aquamarine;
-        height: 100vh;
-        width: 100%;
-    }
-    .content{
-        background-color: azure;
-        border-radius: 18px;
-        margin: 1% 1% 1% 0%;
-    }
 
 </style>
+
+<script lang="ts">
+
+import { defineComponent } from 'vue';
+import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
+import SideBar from '@/components/SideBar.vue'; // @ is an alias to /src
+//import { MarcaClient } from '@/client/marca.client';
+//import { Marca } from '@/model/marca';
+
+import { onMounted, reactive, toRefs } from 'vue';
+
+export default defineComponent({
+  name: 'VeiculoListaView',
+  data() {
+    return {
+      abreAModal: false,
+    };
+  },
+  components: {
+    NavBar,
+    SideBar,
+},
+
+  methods:{
+
+    abreModal(){
+      this.abreAModal = true;
+    },
+    fechaModal(){
+      this.abreAModal = false;
+    },
+    adicionarMarca(){
+
+    },
+    editarMarca(){
+
+    },
+    deletarMarca(){
+
+    }
+  }
+
+});
+
+
+
+</script>

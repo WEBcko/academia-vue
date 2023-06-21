@@ -16,6 +16,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/dashboard',
     name: 'dashboard',
     component: () => import(/* webpackChunkName: "dashboard" */ '../views/DashBoardHome.vue')
+  },
+    path: '/login',
+    name:'login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+  },
+  {
+    path: '/grupo-muscular',
+    name:'grupo-muscular-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularView.vue')
+
   }
 ]
 

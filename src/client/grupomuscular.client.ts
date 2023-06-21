@@ -1,4 +1,4 @@
-import { GrupoMuscular } from '@/models/GrupoMuscular';
+import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
 import axios, {AxiosInstance} from 'axios';
 
 export class GrupoMuscularClient{
@@ -12,31 +12,31 @@ export class GrupoMuscularClient{
         });
     }
 
-    public async findById(id : number) : Promise<GrupoMuscular>{
+    public async findById(id : number) : Promise<GrupoMuscularModel>{
         try{
-            return (await this.axiosClient.get<GrupoMuscular>(`/${id}`)).data
+            return (await this.axiosClient.get<GrupoMuscularModel>(`/${id}`)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
-    public async listAll(): Promise<GrupoMuscular[]>{
+    public async listAll(): Promise<GrupoMuscularModel[]>{
         try{
-            return (await this.axiosClient.get<GrupoMuscular[]>("/listar")).data
+            return (await this.axiosClient.get<GrupoMuscularModel[]>("/listar")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
-    public async cadastrar(grupoMuscular : GrupoMuscular) : Promise<void>{
+    public async cadastrar(grupoMuscularModel : GrupoMuscularModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', grupoMuscular)).data
+            return (await this.axiosClient.post('/', grupoMuscularModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
-    public async editar( grupoMuscular : GrupoMuscular) : Promise<GrupoMuscular>{
+    public async editar( grupoMuscular : GrupoMuscularModel) : Promise<GrupoMuscularModel>{
         try{
             return (await this.axiosClient.put(`/${grupoMuscular.id}`, grupoMuscular)).data
         }catch(error:any){

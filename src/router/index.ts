@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import DashboardView from '../views/grupoMuscular/GrupoMuscularView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,18 +9,14 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
     path: '/dashboard',
     name: 'dashboard',
     component: () => import(/* webpackChunkName: "dashboard" */ '../views/DashBoardHome.vue')
   },
+  {
     path: '/login',
     name:'login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+    component: DashboardView
   },
   {
     path: '/grupo-muscular',

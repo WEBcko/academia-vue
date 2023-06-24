@@ -1,60 +1,172 @@
 <template>
+  <!-- SIDE MENU -->
+  <nav class="side-menu">
+    <ul class="menu-contain">
+      <li class="menu-opc text-center w-100">
+        <a class="menu-button" href="home.html">
+          <i class="bi bi-house-door-fill fs-5"></i>
+          <span class="fw-semibold">HOME</span>
+        </a>
+      </li>
+      <li class="menu-opc text-center w-100">
+        <a class="menu-button" href="alunos.html">
+          <i class="bi bi-person-fill fs-5"></i>
+          <span class="fw-semibold">ALUNOS</span>
+        </a>
+      </li>
+      <li class="menu-opc text-center w-100">
+        <a class="menu-button" href="exercicios.html">
+          <i class="bi bi-scooter fs-5"></i>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-  sideBar
-</button>
+          <span class="fw-semibold">TREINOS</span>
+        </a>
+      </li>
+      <li class="menu-opc text-center w-100">
+        <a class="menu-button" href="exercicios.html">
+          <i class="bi bi-clipboard-fill fs-5"></i>
 
-<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel" style="width:15vw;">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="staticBackdropLabel">ACADEMIA</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-
-  <div class="blocoSideBar mt-5">
-    <div class="offcanvas-md" style="">
-    <i class="bi bi-speedometer2 iconSideBar"></i>
-    <router-link to="/dashboard" data-bs-dismiss="offcanvas">DashBoard</router-link>
-  </div>
-  <div class="offcanvas-md mt-4">
-    <i class="bi bi-people-fill iconSideBar"></i>
-    <router-link to="/alunos" data-bs-dismiss="offcanvas">Alunos</router-link>
-  </div>
-  <div class="offcanvas-md mt-4">
-    <i class="bi bi-person-lines-fill iconSideBar"></i>
-    <router-link to="/personais" data-bs-dismiss="offcanvas">Personais</router-link>
-  </div>
-  <div class="offcanvas-md mt-4">
-    <i class="bi bi-currency-dollar iconSideBar"></i>
-    <router-link to="/financeiro" data-bs-dismiss="offcanvas">Financeiro</router-link>
-  </div>
-  <div class="offcanvas-md mt-4">
-    <i class="bi bi-gear-fill iconSideBar"></i>
-    <router-link to="/configuracao" data-bs-dismiss="offcanvas">
-    <button data-bs-dismiss="offcanvas"> Condiguração</button>  
-    </router-link>
-  </div>
-  </div>
-  
-
-</div>
-
+          <span class="fw-semibold">EXERCÍCIOS</span>
+        </a>
+      </li>
+      <li class="menu-opc text-center w-100">
+        <a class="menu-button" href="personais.html">
+          <i class="bi bi-people-fill fs-5"></i>
+          <span class="fw-semibold">PERSONAIS</span>
+        </a>
+      </li>
+      <li class="menu-opc text-center w-100">
+        <a class="menu-button" id="config-button-desk" href="#">
+          <i class="bi bi-gear-fill fs-5"></i>
+          <span class="fw-semibold">CONFIGURAÇÕES</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
-<style scoped>
+<style>
+/* MENU */
 
-.blocoSideBar{
+.side-menu {
+  z-index: 1;
+  position: fixed;
+  background-color: #004777;
+  transition: width 600ms ease;
+}
+
+.menu-contain {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  width: 60%;
-  align-self: center;
-  text-align: start;
-  font-size: 20px;
+  align-items: center;
+  height: 100%;
 }
 
-.iconSideBar{
-  margin-right: 2vh;
+.menu-opc:first-child {
+  margin-bottom: auto;
 }
 
+.menu-opc:last-child {
+  margin-top: auto;
+}
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: #b2c7d6;
+  text-decoration: none;
+  transition: 600ms;
+}
+
+.menu-button:hover {
+  background-color: #061d2c;
+}
+
+.menu-button span {
+  display: none;
+}
+
+.menu-button i {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+
+
+@media only screen and (max-width: 700px) {
+  .side-menu {
+    bottom: 0;
+    width: 100vw;
+    height: 5rem;
+    overflow-x: auto;
+  }
+
+  .menu-contain {
+    flex-direction: row;
+  }
+
+  .menu-button {
+    justify-content: center;
+  }
+
+  .menu-button span {
+    display: none;
+  }
+
+  .menu-opc:last-child {
+    display: none;
+  }
+
+  .option a {
+    justify-content: flex-end;
+    font-size: ;
+  }
+
+  .config {
+    width: 75%;
+    right: -75%;
+  }
+
+  .background-config {
+    width: 25%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: none;
+  }
+
+}
+
+@media only screen and (min-width: 700px) {
+  .side-menu {
+    top: 0;
+    width: 5rem;
+    height: 100vh;
+  }
+
+  .side-menu:hover {
+    width: 16rem;
+  }
+
+  .side-menu:hover span {
+    display: block;
+    animation: fadeIn 1500ms;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 </style>
 
 <script lang="ts">
@@ -63,8 +175,8 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'SideBar',
-  props: {
-    msg: String,
-  },
+  // props: {
+  //   msg: String,
+  // },
 });
 </script>

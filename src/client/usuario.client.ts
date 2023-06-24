@@ -1,7 +1,7 @@
 import { UsuarioModel } from '@/models/UsuarioModel';
 import axios, {AxiosInstance} from 'axios';
 
-export class UsuarioClient{
+class UsuarioClient{
     private axiosClient : AxiosInstance;
 
     constructor(){
@@ -21,7 +21,7 @@ export class UsuarioClient{
 
     public async listAll(): Promise<UsuarioModel[]>{
         try{
-            return (await this.axiosClient.get<UsuarioModel[]>("/listar")).data
+            return (await this.axiosClient.get<UsuarioModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -29,16 +29,16 @@ export class UsuarioClient{
 
     public async cadastrar(usuarioModel : UsuarioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', usuarioModel)).data
+            return (await this.axiosClient.post<string>('', usuarioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
 
-    public async editar(usuarioModel : UsuarioModel) : Promise<string>{
+    public async editar(id : number, usuarioModel : UsuarioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${usuarioModel.id}`, UsuarioModel)).data
+            return (await this.axiosClient.put<string>(`/${id}`, usuarioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -52,3 +52,5 @@ export class UsuarioClient{
         }
     }
 }
+
+export default new UsuarioClient();

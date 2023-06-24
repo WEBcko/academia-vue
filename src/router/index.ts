@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import DashboardView from '../views/grupoMuscular/GrupoMuscularView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,17 +9,15 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import(/* webpackChunkName: "dashboard" */ '../views/DashBoardHome.vue')
   },
   {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+
   },
   {
     path: '/cadastrar',
@@ -29,6 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/grupo-muscular',
     name: 'grupo-muscular-view',
     component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularView.vue')
+
   }
 ]
 

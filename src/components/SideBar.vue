@@ -122,7 +122,7 @@
 
   .option a {
     justify-content: flex-end;
-    font-size: ;
+    font-size: 12px;
   }
 
   .config {

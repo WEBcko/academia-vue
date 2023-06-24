@@ -15,12 +15,18 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/login',
-    name:'login',
-    component: DashboardView
+    name: 'login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+
+  },
+  {
+    path: '/cadastrar',
+    name: 'cadastrar',
+    component: () => import(/* webpackChunkName: "about" */ '../views/CadastroView.vue')
   },
   {
     path: '/grupo-muscular',
-    name:'grupo-muscular-view',
+    name: 'grupo-muscular-view',
     component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularView.vue')
 
   }

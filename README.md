@@ -1,4 +1,4 @@
-# estacionamento_vue
+# Academia-VUE
 
 ## Project description
 

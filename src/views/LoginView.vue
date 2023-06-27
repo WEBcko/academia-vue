@@ -20,15 +20,15 @@
                             <form class="f">
                                 <div class="mb-3 ">
                                     <label for="exampleInputEmail1" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                    <input v-model="usuario.email"  type="email" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 ">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                    <input v-model="usuario.senha" type="password" class="form-control" id="exampleInputPassword1">
                                 </div>
                                 <div class="mb-3 d-flex justify-content-evenly">
-                                    <button type="submit" class="btn btn-light">Entrar</button>
+                                    <button type="submit" class="btn btn-light" @click="onClickLogin()">Entrar</button>
                                     <RouterLink to="/cadastrar" type="button" class="btn btn-success">Cadastrar</RouterLink>
                                 </div>
                             </form>
@@ -45,7 +45,7 @@
 <script lang="ts">
 import { UsuarioModel } from '@/models/UsuarioModel';
 import { defineComponent } from 'vue';
-import UsuarioClient from '@/client/usuario.client';
+import UsuarioClient from '@/client/UsuarioClient';
 
 export default defineComponent({
     name: 'LoginView',
@@ -65,10 +65,6 @@ export default defineComponent({
             UsuarioClient.cadastrar(this.usuario).then(success => {
                 this.usuario = new UsuarioModel();
 
-                this.mensagem.ativo = true;
-                this.mensagem.mensagem = success;
-                this.mensagem.titulo = "Dale.";
-                this.mensagem.css = "alert alert-success alert-dismissible fade show";
             }).catch(error => {
                 this.mensagem.ativo = true;
                 this.mensagem.mensagem = error;

@@ -1,34 +1,34 @@
-import { EntradaSaidaModel } from '@/models/EntradaSaidaModel';
+import { ExercicioModel } from '@/models/ExercicioModel';
 import axios, {AxiosInstance} from 'axios';
 
-export class EntradaSaida{
+ class ExercicioClient{
+
     private axiosClient : AxiosInstance;
 
     constructor(){
         this.axiosClient = axios.create({
-            baseURL:"http://localhost:8080/api/entradasaida",
+            baseURL:"http://localhost:8080/api/exercicio",
             headers: {'Content-type' : 'application/json'}
         });
     }
 
-
-    public async findById(id : number) : Promise<EntradaSaidaModel>{
+    public async findById(id : number) : Promise<ExercicioModel>{
         try{
-            return (await this.axiosClient.get<EntradaSaidaModel>(`/${id}`)).data
+            return (await this.axiosClient.get<ExercicioModel>(`/${id}`)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
     }
 
-    public async listAll(): Promise<EntradaSaidaModel[]>{
+    public async listAll(): Promise<ExercicioModel[]>{
         try{
-            return (await this.axiosClient.get<EntradaSaidaModel[]>("/listar")).data
+            return (await this.axiosClient.get<ExercicioModel[]>("/listar")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
-    public async cadastrar(exercicioModel : EntradaSaidaModel) : Promise<string>{
+    public async cadastrar(exercicioModel : ExercicioModel) : Promise<string>{
         try{
             return (await this.axiosClient.post('/', exercicioModel)).data
         }catch(error:any){
@@ -37,9 +37,9 @@ export class EntradaSaida{
     }
 
 
-    public async editar(entradaSaidaModel: EntradaSaidaModel) : Promise<string>{
+    public async editar(exercicioModel : ExercicioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${entradaSaidaModel.id}`, entradaSaidaModel)).data
+            return (await this.axiosClient.put(`/${exercicioModel.id}`, exercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -53,5 +53,6 @@ export class EntradaSaida{
         }
     }
 
-
 }
+
+export default new ExercicioClient()

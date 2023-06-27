@@ -1,7 +1,7 @@
 import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
 import axios, {AxiosInstance} from 'axios';
 
-export class GrupoMuscularClient{
+class GrupoMuscularClient{
 
     private axiosClient : AxiosInstance;
 
@@ -54,3 +54,5 @@ export class GrupoMuscularClient{
 
 
 }
+
+export default new GrupoMuscularClient()

@@ -1,47 +1,45 @@
-
-import { TreinoExercicioModel } from '@/models/TreinoExercicio';
+import { EntradaSaidaModel } from '@/models/EntradaSaidaModel';
 import axios, {AxiosInstance} from 'axios';
 
-export class TreinoExercicio{
-
+class EntradaSaidaClient{
     private axiosClient : AxiosInstance;
 
     constructor(){
         this.axiosClient = axios.create({
-            baseURL:"http://localhost:8080/api/treinoexercicios",
+            baseURL:"http://localhost:8080/api/entradasaida",
             headers: {'Content-type' : 'application/json'}
         });
     }
 
 
-    public async findById(id : number) : Promise<TreinoExercicioModel>{
+    public async findById(id : number) : Promise<EntradaSaidaModel>{
         try{
-            return (await this.axiosClient.get<TreinoExercicioModel>(`/${id}`)).data
+            return (await this.axiosClient.get<EntradaSaidaModel>(`/${id}`)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
     }
 
-    public async listAll(): Promise<TreinoExercicioModel[]>{
+    public async listAll(): Promise<EntradaSaidaModel[]>{
         try{
-            return (await this.axiosClient.get<TreinoExercicioModel[]>("/listar")).data
+            return (await this.axiosClient.get<EntradaSaidaModel[]>("/listar")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
-    public async cadastrar(treinoExercicioModel : TreinoExercicioModel) : Promise<string>{
+    public async cadastrar(exercicioModel : EntradaSaidaModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', treinoExercicioModel)).data
+            return (await this.axiosClient.post('/', exercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
 
-    public async editar(treinoExercicioModel : TreinoExercicioModel) : Promise<string>{
+    public async editar(entradaSaidaModel: EntradaSaidaModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${treinoExercicioModel.id}`, treinoExercicioModel)).data
+            return (await this.axiosClient.put(`/${entradaSaidaModel.id}`, entradaSaidaModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -57,3 +55,5 @@ export class TreinoExercicio{
 
 
 }
+
+export default new EntradaSaidaClient()

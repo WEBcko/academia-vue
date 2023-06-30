@@ -1,10 +1,10 @@
 <template>
 
 <div class="demo-app">
-    <div class="dados-Pessoais">
-        <div class="nome">
+    <div class="dados-Pessoais col-md-8">
+        <div class="nome col-md-10">
             <label for=""></label>
-            <input type="text" placeholder="Nome completo">
+            <input type="text" class="col-md-10" placeholder="Nome completo">
         </div>
         <div class="genero">
             <label for=""></label>
@@ -50,9 +50,11 @@
         </div>
         
     </div>
+
     <div class="aluno-de-menor">
 
     </div>
+
     <div class="anamnse-aluno">
         <div class="praticaAtividade">
             <span>Pratica alguma atividade física?</span>

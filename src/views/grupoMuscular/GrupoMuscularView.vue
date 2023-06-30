@@ -8,17 +8,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { GrupoMuscularClient } from '@/client/grupomuscular.client';
-
-const grupoMuscularClient: GrupoMuscularClient = new GrupoMuscularClient;
+import  GrupoMuscularClient  from '@/client/GrupoMuscularClient';
 
 export default defineComponent({
     name:"GrupoMuscularView",
     methods:{
-        testar(){
-            console.log(grupoMuscularClient.listAll());
-            // erro de CORS nao sei resolver 
-        }
+        
     }
 
 });

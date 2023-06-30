@@ -6,7 +6,7 @@ class UsuarioClient{
 
     constructor(){
         this.axiosClient = axios.create({
-            baseURL:"http://localhost:8080/api/exercicio",
+            baseURL:"http://localhost:8080/api/usuario",
             headers: {'Content-type' : 'application/json'}
         });
     }

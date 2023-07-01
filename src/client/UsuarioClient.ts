@@ -36,6 +36,7 @@ class UsuarioClient{
     }
 
 
+
     public async editar(id : number, usuarioModel : UsuarioModel) : Promise<string>{
         try{
             return (await this.axiosClient.put<string>(`/${id}`, usuarioModel)).data

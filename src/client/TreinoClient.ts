@@ -7,7 +7,7 @@ class TreinoClient{
 
     constructor(){
         this.axiosClient = axios.create({
-            baseURL:"http://localhost:8080/api/entradasaida",
+            baseURL:"http://localhost:8080/api/treino",
             headers: {'Content-type' : 'application/json'}
         });
     }

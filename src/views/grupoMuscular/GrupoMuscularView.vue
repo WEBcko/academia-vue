@@ -59,7 +59,6 @@ import { GrupoMuscularModel }  from '@/models/GrupoMuscularModel';
 import  GrupoMuscularClient  from '@/client/GrupoMuscularClient';
 import NavBar from '@/components/NavBar.vue';
 
-
 export default defineComponent({
     name:"GrupoMuscularView",
     components: {

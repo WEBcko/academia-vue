@@ -36,7 +36,7 @@ class GrupoMuscularClient{
         }
     }
 
-    public async editar( grupoMuscular : GrupoMuscularModel) : Promise<GrupoMuscularModel>{
+    public async editar(id: number, grupoMuscular : GrupoMuscularModel) : Promise<string>{
         try{
             return (await this.axiosClient.put(`/${grupoMuscular.id}`, grupoMuscular)).data
         }catch(error:any){

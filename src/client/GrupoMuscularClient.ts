@@ -22,7 +22,7 @@ class GrupoMuscularClient{
 
     public async listAll(): Promise<GrupoMuscularModel[]>{
         try{
-            return (await this.axiosClient.get<GrupoMuscularModel[]>("/listar")).data
+            return (await this.axiosClient.get<GrupoMuscularModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -30,7 +30,7 @@ class GrupoMuscularClient{
 
     public async cadastrar(grupoMuscularModel : GrupoMuscularModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', grupoMuscularModel)).data
+            return (await this.axiosClient.post('', grupoMuscularModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

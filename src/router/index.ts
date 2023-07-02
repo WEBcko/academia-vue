@@ -76,24 +76,46 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   {
-    path: '/exercicio',
-    name: 'exercicio-view',
-    component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosView.vue')
+    path: '/treino',
+    name: 'treino-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/treino/TreinoView.vue')
   },
   {
-    path: '/exercicio-cadastrar',
-    name: 'exercicio-cadastrar-view',
-    component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+    path: '/treino-cadastrar',
+    name: 'treino-cadastrar-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/treino/TreinoCadastrar.vue'),
     children: [
       {
-        path: '/exercicio-cadastrar',
-        name: 'exercicio-cadastrar-editar-view',
-        component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+        path: '/treino-cadastrar',
+        name: 'treino-cadastrar-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/treino/TreinoCadastrar.vue'),
       },
       {
-        path: '/exercicio-cadastrar',
-        name: 'exercicio-cadastrar-excluir-view',
-        component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+        path: '/treino-cadastrar',
+        name: 'treino-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/treino/TreinoCadastrar.vue'),
+      },
+    ]
+  },
+  {
+    path: '/usuario',
+    name: 'usuario-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/usuario/ClienteListarView.vue')
+  },
+  {
+    path: '/usuario-cadastrar',
+    name: 'usuario-cadastrar-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/usuario/ClienteCadastrar.vue'),
+    children: [
+      {
+        path: '/usuario-cadastrar',
+        name: 'usuario-cadastrar-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/usuario/ClienteCadastrar.vue'),
+      },
+      {
+        path: '/usuario-cadastrar',
+        name: 'usuario-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/usuario/ClienteCadastrar.vue'),
       },
     ]
   },

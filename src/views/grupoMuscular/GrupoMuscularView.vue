@@ -34,11 +34,11 @@
       <th class="col-md-2">
         <div class="btn-group" role="group">
           <RouterLink type="button" class="btn text-align-center col-md-2" 
-            :to="{name: 'grupo-muscular-cadastrar-editar', query: {id: item.id, form: 'editar'}}">
+            :to="{name: 'grupo-muscular-cadastrar-editar-view', query: {id: item.id, form: 'editar'}}">
             <span class="badge bg-warning btn text-align-center col">EDITAR</span>
           </RouterLink>
           <RouterLink type="button" class="btn text-align-center col-md-2" 
-            :to="{name: 'grupo-muscular-cadastrar-excluir', query: {id: item.id, form: 'excluir'}}">
+            :to="{name: 'grupo-muscular-cadastrar-excluir-view', query: {id: item.id, form: 'excluir'}}">
             <span class="badge bg-danger btn text-align-center col">EXCLUIR</span>
           </RouterLink>
         </div>

@@ -22,7 +22,7 @@ class EntradaSaidaClient{
 
     public async listAll(): Promise<EntradaSaidaModel[]>{
         try{
-            return (await this.axiosClient.get<EntradaSaidaModel[]>("/listar")).data
+            return (await this.axiosClient.get<EntradaSaidaModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -30,7 +30,7 @@ class EntradaSaidaClient{
 
     public async cadastrar(exercicioModel : EntradaSaidaModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', exercicioModel)).data
+            return (await this.axiosClient.post('', exercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

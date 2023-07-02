@@ -22,7 +22,7 @@ import axios, {AxiosInstance} from 'axios';
 
     public async listAll(): Promise<ExercicioModel[]>{
         try{
-            return (await this.axiosClient.get<ExercicioModel[]>("/listar")).data
+            return (await this.axiosClient.get<ExercicioModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -30,7 +30,7 @@ import axios, {AxiosInstance} from 'axios';
 
     public async cadastrar(exercicioModel : ExercicioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', exercicioModel)).data
+            return (await this.axiosClient.post('', exercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

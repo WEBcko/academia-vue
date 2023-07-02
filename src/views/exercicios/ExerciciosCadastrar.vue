@@ -23,10 +23,10 @@
     </div>
     
     <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">Nome da Marca:</label>
+      <label for="recipient-name" class=" row m-auto col-form-label">Grupo Muscular:</label>
       <select type="text" class="row ms-1" v-model="exercicio.idGrupoMuscular">
         <option v-for="item in grupoMuscular" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
-        :value="item">{{ item.nome }}</option>
+        :value="item.id">{{ item.nome }}</option>
       </select>
     </div>
 
@@ -64,9 +64,6 @@
   import GrupoMuscularClient from '@/client/GrupoMuscularClient';
   import { ExercicioModel } from '@/models/ExercicioModel';
   import ExercicioCLient from '@/client/ExercicioCLient';
-import { ex } from '@fullcalendar/core/internal-common';
-
-
   
   export default defineComponent({
     name: 'ModeloCadastrar',

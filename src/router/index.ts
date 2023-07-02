@@ -33,8 +33,71 @@ const routes: Array<RouteRecordRaw> = [
     path: '/grupo-muscular',
     name: 'grupo-muscular-view',
     component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularView.vue')
+  },
+  {
+    path: '/grupo-muscular-cadastrar',
+    name: 'grupo-muscular-cadastrar-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularCadastrar.vue'),
+    children: [
+      {
+        path: '/grupo-muscular-cadastrar',
+        name: 'grupo-muscular-cadastrar-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularCadastrar.vue'),
+      },
+      {
+        path: '/grupo-muscular-cadastrar',
+        name: 'grupo-muscular-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularCadastrar.vue'),
+      },
+    ]
+  },
 
-  }
+  {
+    path: '/exercicio',
+    name: 'exercicio-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosView.vue')
+  },
+  {
+    path: '/exercicio-cadastrar',
+    name: 'exercicio-cadastrar-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+    children: [
+      {
+        path: '/exercicio-cadastrar',
+        name: 'exercicio-cadastrar-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+      },
+      {
+        path: '/exercicio-cadastrar',
+        name: 'exercicio-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+      },
+    ]
+  },
+
+  {
+    path: '/exercicio',
+    name: 'exercicio-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosView.vue')
+  },
+  {
+    path: '/exercicio-cadastrar',
+    name: 'exercicio-cadastrar-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+    children: [
+      {
+        path: '/exercicio-cadastrar',
+        name: 'exercicio-cadastrar-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+      },
+      {
+        path: '/exercicio-cadastrar',
+        name: 'exercicio-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/exercicios/ExerciciosCadastrar.vue'),
+      },
+    ]
+  },
+
 ]
 
 const router = createRouter({

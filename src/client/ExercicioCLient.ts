@@ -37,7 +37,7 @@ import axios, {AxiosInstance} from 'axios';
     }
 
 
-    public async editar(exercicioModel : ExercicioModel) : Promise<string>{
+    public async editar(id: number, exercicioModel : ExercicioModel) : Promise<string>{
         try{
             return (await this.axiosClient.put(`/${exercicioModel.id}`, exercicioModel)).data
         }catch(error:any){

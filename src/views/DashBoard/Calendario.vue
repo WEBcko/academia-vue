@@ -43,6 +43,13 @@ export default defineComponent({
     }
   },
   methods: {
+
+    pegaEventos(){
+
+      calendarApi.getEvents({
+        title,
+      })
+    },
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
     },
@@ -50,6 +57,7 @@ export default defineComponent({
       let title = prompt('Adicione o Evento')
       let calendarApi = selectInfo.view.calendar
 
+      console.log(title);
       calendarApi.unselect() // clear date selection
 
       if (title) {
@@ -82,7 +90,6 @@ export default defineComponent({
         <template v-slot:eventContent='arg'>
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
-          <span>te amo erick</span>
         </template>
       </FullCalendar>
     </div>

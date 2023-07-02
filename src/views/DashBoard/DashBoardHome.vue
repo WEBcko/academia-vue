@@ -9,25 +9,39 @@
 <div class="tela">
   <div class="conteudo-Dash row mt-5 ms-5">
 
-    <div class="col-md-9">
-      <full-calendar v-if="calendarioAtivar" class="calendario "></full-calendar>
-      <formulario v-if="formularioAtivar"> </formulario>
-    </div>
-    
-    <div class="botoes col-md-3">
-      <div class="offset-md-2 col-md-12">
-        <router-link to="" class="col col-md-1 me-2">
-          <button type="button" class="btn btn-success" @click="onclickCalendario()">Calendario</button>
-        </router-link>
-        <router-link to="" class="col col-md-1 me-2">
-          <button type="button" class="btn btn-success">Notificação</button>
-        </router-link>
-        <router-link to="" class="col col-md-1">
-          <button type="button" class="btn btn-success" @click="onclickFormulario()">Formulario</button>
-        </router-link>
-      </div>
-    </div>
+    <div class="col-md-9 conteudo">
+      <full-calendar  class="calendario" v-show="calendarioAtivar"></full-calendar>
+      <formulario  v-show="formularioAtivar"> </formulario>
+      
 
+    </div>
+    <!-- v-if="calendarioAtivar" -->
+    <!-- v-if="formularioAtivar" -->
+   
+    
+    <div class="botoes col-md-2 offset-md-3">
+
+      <div class="headerNotificacao d-flex ">
+        <div class="offset-md-2 col-md-10">
+          <router-link to="" class="col col-md-1 me-2">
+            <button type="button" class="btn btn-success" @click="onclickCalendario()">Calendario</button>
+          </router-link>
+          <router-link to="" class="col col-md-1">
+            <button type="button" class="btn btn-success" @click="onclickFormulario()">Formulario</button>
+          </router-link>
+        </div>
+      </div>
+
+      <div class="bodyNotificacao col">
+          
+          <div class="notificacao1">
+            <header class="tituloNotificacao">Notificacao</header>
+            <span class="bodyNotificacao">Aluno novo cadastrado</span>
+          </div>
+
+        </div>
+
+    </div>
   </div>
 
 </div>
@@ -40,6 +54,12 @@
   --bs-gutter-x: 0;
 }
 
+.conteudo{
+
+  display: flex;
+  justify-content: center;
+}
+
 .navBar-Dash{
   margin-bottom: 0px;
   text-align: center;
@@ -47,8 +67,24 @@
   color: #cedde7;
 }
 
-.tela{
+.notificacao1{
+  padding: 2%;
+}
+
+.tituloNotificacao{
+  background-color: #f1f1f1;
+  border-color: rgb(201, 201, 201);
+  border-style: none;
+  border-bottom-style: solid;
+}
+
+.bodyNotificacao{
+  background-color: #e2e2e2;
   
+}
+
+.headerNotificacao{
+  margin-top: 2%;
 }
 
 .calendario{
@@ -58,6 +94,10 @@
 .botoes{
   margin: 0 auto;
   margin-bottom: 2%;
+  /* border-style: solid; */
+  border-color: #004777;
+  border-radius: 10px;
+  border-width: 3px;
 }
 
 </style>

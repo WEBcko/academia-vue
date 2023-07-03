@@ -7,38 +7,38 @@
 
     <ul class="menu-contain">
 
-      <li class="menu-opc text-center w-100">
+      <li class="menu-opc text-center w-100 ms-0">
         <a class="menu-button" href="/dashboard">
           <i class="bi bi-house-door-fill fs-5"></i>
           <span class="fw-semibold">HOME</span>
         </a>
       </li>
-      <li class="menu-opc text-center w-100">
+      <li class="menu-opc text-center w-100 ms-0">
         <a class="menu-button" href="/usuario">
           <i class="bi bi-person-fill fs-5"></i>
           <span class="fw-semibold">ALUNOS</span>
         </a>
       </li>
-      <li class="menu-opc text-center w-100">
+      <li class="menu-opc text-center w-100 ms-0">
         <a class="menu-button" href="/treino">
           <i class="bi bi-scooter fs-5"></i>
 
           <span class="fw-semibold">TREINOS</span>
         </a>
       </li>
-      <li class="menu-opc text-center w-100">
+      <li class="menu-opc text-center w-100 ms-0">
         <a class="menu-button" href="/treinoexercicio">
           <i class="bi bi-clipboard-fill fs-5"></i>
           <span class="fw-semibold">TREINO EXERCÍCIOS</span>
         </a>
       </li>
-      <li class="menu-opc text-center w-100">
+      <li class="menu-opc text-center w-100 ms-0">
         <a class="menu-button" href="/exercicio">
           <i class="bi bi-clipboard-fill fs-5"></i>
           <span class="fw-semibold">EXERCICIOS</span>
         </a>
       </li>
-      <li class="menu-opc text-center w-100">
+      <li class="menu-opc text-center w-100 ms-0">
         <a class="menu-button" id="config-button-desk" href="#">
           <i class="bi bi-gear-fill fs-5"></i>
           <span class="fw-semibold">CONFIGURAÇÕES</span>

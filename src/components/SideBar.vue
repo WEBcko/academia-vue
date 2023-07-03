@@ -1,6 +1,7 @@
 <template>
   <!-- SIDE MENU -->
-  <nav class="side-menu">
+  <nav class="navbar navbar-expand-lg side-menu">
+
     <ul class="menu-contain">
       <li class="menu-opc text-center w-100">
         <a class="menu-button" href="home.html">
@@ -41,6 +42,7 @@
         </a>
       </li>
     </ul>
+
   </nav>
 </template>
 
@@ -98,14 +100,14 @@
 
 @media only screen and (max-width: 700px) {
   .side-menu {
-    bottom: 0;
     width: 100vw;
-    height: 5rem;
+    height: 3.5rem;
+    top: 0;
     overflow-x: auto;
   }
 
   .menu-contain {
-    flex-direction: row;
+    display: none;
   }
 
   .menu-button {
@@ -146,6 +148,10 @@
     top: 0;
     width: 5rem;
     height: 100vh;
+  }
+
+  .ham-burguer {
+    display: none;
   }
 
   .side-menu:hover {

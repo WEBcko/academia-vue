@@ -44,6 +44,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'grupo-muscular-cadastrar-editar-view',
         component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularCadastrar.vue'),
       },
+      {
+        path: '/grupo-muscular-cadastrar',
+        name: 'grupo-muscular-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/grupoMuscular/GrupoMuscularCadastrar.vue'),
+      },
     ]
   },
   { 

@@ -1,6 +1,6 @@
 <template>
   <!-- SIDE MENU -->
-  <nav class="navbar navbar-expand-lg side-menu">
+  <nav class="navbar navbar-expand-lg side-menu py-0">
 
     <ul class="menu-contain">
       <li class="menu-opc text-center w-100">
@@ -64,6 +64,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 .menu-opc:first-child {

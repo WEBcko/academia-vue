@@ -95,7 +95,7 @@
 
         try{
           this.grupoMuscular.id = Number(this.$route.params.grupoMuscularId);
-          await this.grupo.editar(this.grupoMuscular.id,this.grupoMuscular);
+          await GrupoMuscularClient.editar(this.grupoMuscular.id,this.grupoMuscular);
 
           this.mensagem.mensagem = "sucess";
           this.mensagem.titulo = "Grupo Muscular editado com sucesso!";

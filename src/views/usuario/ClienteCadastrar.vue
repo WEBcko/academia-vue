@@ -1,5 +1,4 @@
 <template>
-
     <NavBar></NavBar>
   
   <div class="container col-md-8 corTabela"> 

@@ -66,7 +66,7 @@
   import { UsuarioClient } from '@/client/UsuarioClient';
   import { UsuarioRole } from '@/models/UsuarioRoleModel';
   import { PageResponse } from '@/models/page-response';
-  import { PageRequest } from '@/models/page-request'
+  import { PageRequest } from '@/models/page-request';
 
 
   export default defineComponent({

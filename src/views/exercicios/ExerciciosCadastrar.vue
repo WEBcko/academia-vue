@@ -60,9 +60,9 @@
   
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
-  
   import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
   import GrupoMuscularClient from '@/client/GrupoMuscularClient';
+
 
   import { ExercicioModel } from '@/models/ExercicioModel';
   import ExercicioCLient from '@/client/ExercicioCLient';
@@ -144,9 +144,11 @@
           this.mensagem.mensagem = sucess;
           this.mensagem.titulo = "Exercicio cadastrado com sucesso ";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
+
         })
         
         .catch(error =>{
+
           console.log(error)
           console.log(this.exercicio);
           
@@ -155,8 +157,9 @@
           this.mensagem.mensagem = error;
           this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Exercicio ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
+
         })
-          
+
     },
 
     onClickEditar(){
@@ -205,7 +208,6 @@
         })
     },
 
-    
 
  }
   

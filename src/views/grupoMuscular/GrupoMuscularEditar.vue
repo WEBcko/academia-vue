@@ -20,19 +20,14 @@
   
     <div class="nome col">
       <label for="recipient-name" class=" row m-auto col-form-label">Nome do Grupo Muscular:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="grupoMuscular.nome" v-if="this.form === undefined">
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="grupoMuscular.nome" v-if="this.form === 'editar'">
-
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="grupoNome">
     </div>
   
     <div class="col d-flex align-items-center justify-content-center">
       <router-link class="col col-md-1" to="/grupo-muscular">
           <button type="button" class="btn btn-success">Voltar</button>
       </router-link>
-  
-      <button type="button" v-if="this.form === undefined" class="btn btn-success mt-2 mb-2" @click="onClickCadastrar()"> Cadastrar</button>
-      <button type="button" v-if="this.form === 'editar'" class="btn btn-warning mt-2 mb-2" @click="onClickEditar()"> Editar</button>
-      <button type="button" v-if="this.form === 'excluir'" class="btn btn-danger mt-2 mb-2" @click="onClickExcluir()"> Excluir</button>
+        <button type="button" v-if="this.form === 'editar'" class="btn btn-warning mt-2 mb-2" @click="onClickEditar()"> Editar</button>
     </div>
   </div>
   </template>
@@ -54,7 +49,7 @@
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
   import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
   import  GrupoMuscularClient  from '@/client/GrupoMuscularClient';
-
+  
   export default defineComponent({
     name: 'GrupoMuscularCadastrar',
     data() {
@@ -76,10 +71,6 @@
       form(){
         return this.$route.query.form
       },
-      // grupo(){
-      //   return new GrupoMuscularClient();
-      // }
-
     },
     mounted() {
       
@@ -91,55 +82,58 @@
       NavBar,
     },
     methods:{
+  
       //CADASTRAR
-      //
-      onClickCadastrar(){
+      //        
+      async onClickEditar(){
+        if(!this.grupoMuscular.nome){
+          this.mensagem.titulo = "Erro, não foi possivel cadastrar o Grupo Muscular ";
+          return;
+        }
 
+        this.grupoMuscular.nome = this.grupoNome;
 
-          GrupoMuscularClient.cadastrar(this.grupoMuscular).then(sucess =>{
-          this.grupoMuscular = new GrupoMuscularModel();
-            this.mensagem.ativo = true;
-            this.mensagem.mensagem = sucess;
-            this.mensagem.titulo = "Grupo Muscular Cadastrado com sucesso!";
-            this.mensagem.css = "alert alert-success alert-dismissible fade show";
-        
+        try{
+          this.grupoMuscular.id = Number(this.$route.params.grupoMuscularId);
+          await this.grupo.editar(this.grupoMuscular.id,this.grupoMuscular);
 
-          })
-
-        .catch (error=>{
-            console.log(error)
-            this.mensagem.ativo = true;
+          this.mensagem.mensagem = "sucess";
+          this.mensagem.titulo = "Grupo Muscular editado com sucesso!";
+          this.mensagem.css = "alert alert-success alert-dismissible fade show";
+        } catch(error : any){
+          this.mensagem.ativo = true;
             this.mensagem.mensagem = error;
-            this.mensagem.titulo = "Erro, não foi possivel cadastrar o Grupo Muscular ";
+            this.mensagem.titulo = "Erro, não foi possivel editar o Grupo Muscular ";
             this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        }) 
-          
+        }
+        
       },
   
-         
-      async onClickEditar(){
-      console.log("Antes do metodo");
-      
-      GrupoMuscularClient.editar(this.grupoMuscular.id, this.grupoMuscular)
-        .then(sucess => {
-          console.log("Depois");
-          this.grupoMuscular = new GrupoMuscularModel()
-          console.log(sucess);
+      // //EXCLUIR
+      // //
+      // onClickExcluir(){
+      //   GrupoMuscularClient.deletar(this.grupoMuscular.id).then(sucess =>{
+      //         this.grupoMuscular = new GrupoMuscularModel();
+  
+      //         this.mensagem.ativo = true;
+      //         this.mensagem.mensagem = sucess;
+      //         this.mensagem.titulo = "Grupo Muscular Excluido com sucesso!";
+      //         this.mensagem.css = "alert alert-success alert-dismissible fade show";
+  
+      //     })
+      //     .catch(error =>{
+      //       console.log(error)
+  
+      //       this.mensagem.ativo = true;
+      //       this.mensagem.mensagem = error;
+      //       this.mensagem.titulo = "Erro, Não foi possivel excluir o Grupo Muscular";
+      //       this.mensagem.css = "alert alert-danger alert-dismissible fade show";
+      //     })
+      // },
+  
+      //FIND BY ID
+      //
 
-          this.mensagem.ativo = true;
-          this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Exercicio Editado com sucesso!";
-          this.mensagem.css = "alert alert-success alert-dismissible fade show";
-         
-        })
-        .catch(error => {
-          console.log(error)
-          this.mensagem.ativo = true;
-          this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel editar o Exercicio ";
-          this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        });
-    },  
 
       findById(id: number){
           GrupoMuscularClient.findById(id).then(sucess =>{

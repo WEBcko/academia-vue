@@ -1,7 +1,9 @@
 import { ExercicioModel } from '@/models/ExercicioModel';
 import axios, {AxiosInstance} from 'axios';
+import { PageRequest } from '@/models/page-request';
+import { PageResponse } from '@/models/page-response';
 
- class ExercicioClient{
+ export class ExercicioClient{
 
     private axiosClient : AxiosInstance;
 
@@ -30,7 +32,9 @@ import axios, {AxiosInstance} from 'axios';
 
     public async cadastrar(exercicioModel : ExercicioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('', exercicioModel)).data
+            console.log(exercicioModel);
+            
+            return (await this.axiosClient.post<string>(``, exercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -52,6 +56,15 @@ import axios, {AxiosInstance} from 'axios';
             return Promise.reject(error.response)
         }
     }
+
+    public async findByFiltrosPaginado(pageRequest: PageRequest): Promise<PageResponse<ExercicioModel>> {
+		try {
+
+			return (await this.axiosClient.get<PageResponse<ExercicioModel>>(`/role`)).data
+		} catch (error:any) { 
+			return Promise.reject(error.response) 
+		}
+	}
 
 }
 

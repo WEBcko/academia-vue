@@ -5,7 +5,7 @@
   <div class="container col-md-8 corTabela"> 
 
     <div class="row align-items-center"> 
-      <h1 class="col mt-2">Cadastrar Exercicio</h1>
+      <h1 class="col mt-2">Cadastrar Treino-Exercicio</h1>
     </div>
 
     <div v-if="mensagem.ativo" class="row">
@@ -16,22 +16,40 @@
         </div>
       </div>
     </div>
-
-    <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">Nome do Exercicio:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="exercicio.nome">
-    </div>
     
     <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">Grupo Muscular:</label>
-      <select type="text" class="row ms-1" v-model="exercicio.idGrupoMuscular">
-        <option v-for="item in grupoMuscular" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
-        :value="item">{{ item.nome }}</option>
+      <label for="recipient-name" class=" row m-auto col-form-label">Treino:</label>
+      <select type="text" class="row ms-1" v-model="treinoExercicio.idTreino">
+        <option v-for="item in treino" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+        :value="item.id">{{ item.codigoOrdem }}</option>
       </select>
     </div>
 
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">Exercicio:</label>
+      <select type="text" class="row ms-1" v-model="treinoExercicio.idExercicio">
+        <option v-for="item in exercicio" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+        :value="item.id">{{ item.nome }}</option>
+      </select>
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">dificuldade:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="treinoExercicio.dificuldade">
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">peso:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="treinoExercicio.peso">
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">series:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="treinoExercicio.series">
+    </div>
+
     <div class="col d-flex align-items-center justify-content-center">
-    <router-link class="col col-md-1" to="/exercicio">
+    <router-link class="col col-md-1" to="/treinoexercicio">
         <button type="button" class="btn btn-success">Voltar</button>
     </router-link>
 
@@ -60,19 +78,23 @@
   
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
-  import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
-  import GrupoMuscularClient from '@/client/GrupoMuscularClient';
-
 
   import { ExercicioModel } from '@/models/ExercicioModel';
   import ExercicioCLient from '@/client/ExercicioCLient';
+
+  import { TreinoModel } from '@/models/TreinoModel';
+  import TreinoClient from '@/client/TreinoClient';
+
+  import { TreinoExercicioModel } from '@/models/TreinoExercicio';
+  import TreinoExercicioClient from '@/client/TreinoExercicioClient';
   
   export default defineComponent({
-    name: 'ExercicioCadastrar',
+    name: 'ModeloCadastrar',
     data() {
       return {
-        exercicio: new ExercicioModel(),
-        grupoMuscular: new Array<GrupoMuscularModel>(),
+        treinoExercicio: new TreinoExercicioModel(),
+        exercicio: new Array<ExercicioModel>(),
+        treino: new Array<TreinoModel>(),
         
         mensagem: {
         ativo: false as boolean,
@@ -99,14 +121,15 @@
      this.findById(Number(this.id));
     }
 
-    this.findAllGrupoMuscular();   
+    this.findAllTreino();
+    this.findAllExercicio();     
  },
  methods:{
     //FIND BY ID
     //
     findById(id: number){
-        ExercicioCLient.findById(id).then(sucess =>{
-        this.exercicio = sucess
+        TreinoExercicioClient.findById(id).then(sucess =>{
+        this.treinoExercicio = sucess
           
     })
     .catch(error =>{
@@ -119,60 +142,66 @@
     })
     },
 
-    findAllGrupoMuscular(){
-      GrupoMuscularClient.listAll().then(sucess =>{
-        this.grupoMuscular = sucess;
+    findAllTreino(){
+      TreinoClient.listAll().then(sucess =>{
+        this.treino = sucess;
         console.log(sucess);
       })
       .catch(error =>{
           console.log(error)
 
         })
+
+    },
+
+    findAllExercicio(){
+      ExercicioCLient.listAll().then(sucess =>{
+        this.exercicio = sucess;
+        console.log(sucess);
+      })
+      .catch(error =>{
+          console.log(error)
+
+        })
+
     },
 
     //CADASTRAR
     //
     async onClickCadastrar(){
-
-          ExercicioCLient.cadastrar(this.exercicio).then(sucess =>{
-          this.exercicio = new ExercicioModel();
-          console.log(sucess);
-          console.log(this.exercicio);
-          
+      try{
+        const response = await TreinoExercicioClient.cadastrar(this.treinoExercicio);
+        const data = response;
 
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Exercicio cadastrado com sucesso ";
+          this.mensagem.mensagem = "sucess";
+          this.mensagem.titulo = "Treino-Exercicio cadastrado com sucesso ";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
-
-        })
-        
-        .catch(error =>{
-
+      
+        }
+        catch(error : any){
           console.log(error)
-          console.log(this.exercicio);
-          
+          console.log(typeof(this.treinoExercicio.idExercicio.id));
+          console.log(typeof(this.treinoExercicio.idTreino.id));
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
           this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Exercicio ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-
-        })
-
+        }
     },
 
     onClickEditar(){
       console.log("Antes do metodo");
-      ExercicioCLient.editar(this.exercicio.id, this.exercicio)
+      TreinoExercicioClient.editar(this.treinoExercicio.id, this.treinoExercicio)
         .then(sucess => {
           console.log("Depois");
-          this.exercicio = new ExercicioModel()
+          this.treinoExercicio = new TreinoExercicioModel()
           console.log(sucess);
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Exercicio Editado com sucesso!";
+          this.mensagem.titulo = "Treino-Exercicio Editado com sucesso!";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
          
         })
@@ -180,7 +209,7 @@
           console.log(error)
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel editar o Exercicio ";
+          this.mensagem.titulo = "Erro, não foi possivel editar o Treino-Exercicio ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     },
@@ -188,12 +217,12 @@
     //EXCLUIR
     //
     onClickExcluir(){
-      ExercicioCLient.deletar(this.exercicio.id).then(sucess =>{
-            this.exercicio = new ExercicioModel();
+      TreinoExercicioClient.deletar(this.treinoExercicio.id).then(sucess =>{
+            this.treinoExercicio = new TreinoExercicioModel();
 
             this.mensagem.ativo = true;
             this.mensagem.mensagem = sucess;
-            this.mensagem.titulo = "Exercicio Excluido com sucesso!";
+            this.mensagem.titulo = "Treino-Exercicio Excluido com sucesso!";
             this.mensagem.css = "alert alert-success alert-dismissible fade show";
 
             //this.$router.push({name: 'marca-lista-view'})
@@ -203,11 +232,10 @@
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, Não foi possivel excluir o Exercicio";
+          this.mensagem.titulo = "Erro, Não foi possivel excluir o Treino-Exercicio";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         })
     },
-
 
  }
   

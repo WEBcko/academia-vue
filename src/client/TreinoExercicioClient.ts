@@ -1,8 +1,9 @@
-
 import { TreinoExercicioModel } from '@/models/TreinoExercicio';
 import axios, {AxiosInstance} from 'axios';
+import { PageRequest } from '@/models/page-request';
+import { PageResponse } from '@/models/page-response';
 
-class TreinoExercicioClient{
+export class TreinoExercicioClient{
 
     private axiosClient : AxiosInstance;
 
@@ -39,9 +40,9 @@ class TreinoExercicioClient{
     }
 
 
-    public async editar(treinoExercicioModel : TreinoExercicioModel) : Promise<string>{
+    public async editar(id: number, treinoExercicioModel : TreinoExercicioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${treinoExercicioModel.id}`, treinoExercicioModel)).data
+            return (await this.axiosClient.put<string>(`/${id}`, treinoExercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -54,6 +55,15 @@ class TreinoExercicioClient{
             return Promise.reject(error.response)
         }
     }
+
+    public async findByFiltrosPaginado(pageRequest: PageRequest): Promise<PageResponse<TreinoExercicioModel>> {
+		try {
+
+			return (await this.axiosClient.get<PageResponse<TreinoExercicioModel>>(`/role`)).data
+		} catch (error:any) { 
+			return Promise.reject(error.response) 
+		}
+	}
 
 
 }

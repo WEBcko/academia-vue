@@ -1,7 +1,13 @@
 import { UsuarioModel } from '@/models/UsuarioModel';
+// import { PageRequest } from "@/model/page-request";
+// import { PageResponse } from "@/model/page-response";
+import { PageRequest } from '@/models/page-request';
+import { PageResponse } from '@/models/page-response';
+
 import axios, {AxiosInstance} from 'axios';
 
-class UsuarioClient{
+export class UsuarioClient {
+
     private axiosClient : AxiosInstance;
 
     constructor(){
@@ -10,6 +16,7 @@ class UsuarioClient{
             headers: {'Content-type' : 'application/json'}
         });
     }
+
 
     public async findById(id : number) : Promise<UsuarioModel>{
         try{
@@ -36,6 +43,7 @@ class UsuarioClient{
     }
 
 
+
     public async editar(id : number, usuarioModel : UsuarioModel) : Promise<string>{
         try{
             return (await this.axiosClient.put<string>(`/${id}`, usuarioModel)).data
@@ -51,6 +59,15 @@ class UsuarioClient{
             return Promise.reject(error.response)
         }
     }
+
+    public async findByFiltrosPaginado(pageRequest: PageRequest): Promise<PageResponse<UsuarioModel>> {
+		try {
+
+			return (await this.axiosClient.get<PageResponse<UsuarioModel>>(`/role`)).data
+		} catch (error:any) { 
+			return Promise.reject(error.response) 
+		}
+	}
 }
 
 export default new UsuarioClient();

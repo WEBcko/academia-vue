@@ -6,7 +6,7 @@ class LoginClient{
 
     constructor(){
         this.axiosClient = axios.create({
-            baseURL:"http://localhost:8080/api/usuario",
+            baseURL:"http://localhost:8080/api/login",
             headers: {'Content-type' : 'application/json'}
         });
     }

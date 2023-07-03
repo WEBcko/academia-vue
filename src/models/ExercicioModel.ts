@@ -7,5 +7,4 @@ export class ExercicioModel extends AbstractEntity{
     idGrupoMuscular! : GrupoMuscularModel
     nome! : string
 
-
 }

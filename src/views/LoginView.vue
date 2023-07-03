@@ -9,15 +9,15 @@
                             <form class="f">
                                 <div class="mb-3 ">
                                     <label for="exampleInputEmail1" class="form-label">Email</label>
-                                    <input v-model="email"  type="email" placeholder="Seu email" class="form-control" id="exampleInputEmail1"
+                                    <input v-model="loginRequest.username"  type="email" placeholder="Seu email" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 ">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input v-model="senha" type="password" placeholder="Sua Senha" class="form-control" id="exampleInputPassword1">
+                                    <input v-model="loginRequest.senha" type="password" placeholder="Sua Senha" class="form-control" id="exampleInputPassword1">
                                 </div>
                                 <div class="mb-3 d-flex justify-content-evenly">
-                                    <button type="submit" class="btn btn-light" @click="login()">Entrar</button>
+                                    <button type="submit" class="btn btn-light" @click="onClickLogin()">Entrar</button>
                                     <RouterLink to="/cadastrar" type="button" class="btn btn-success">Cadastrar</RouterLink>
                                 </div>
                             </form>
@@ -31,31 +31,37 @@
 </template>
 
 <script lang="ts">
+
 import { UsuarioModel } from '@/models/UsuarioModel';
 import { defineComponent } from 'vue';
 import UsuarioClient from '@/client/UsuarioClient';
+import { LoginRequest } from '@/models/LoginRequestModel';
+import AuthClient from "@/client/AuthClient";
+import setAuthorizationHeader  from "@/client/axios-config";
 
 export default defineComponent({
     name: 'LoginView',
     data() {
         return {
-            usuario: new UsuarioModel(),
-            email: '',
-            senha: ''
+            loginRequest : new LoginRequest()
+
         }
     },
     methods: {
         onClickLogin() {
-            UsuarioClient.cadastrar(this.usuario).then(success => {
-                this.usuario = new UsuarioModel();
+            AuthClient.login(this.loginRequest).then(success =>{
+                // console.log(success);
 
-            }).catch(error => {
-                
+                   // Realize a autenticação e obtenha o token JWT
+                    const token = success; // Substitua com o seu token JWT
+
+                    // Configure o cabeçalho de autorização com o token JWT
+                    setAuthorizationHeader(token);
+
+
+            }).catch(error =>{
+                return Promise.reject(error.response)
             })
-        },
-        login(){
-            console.log(this.email)
-            console.log(this.senha)
         }
     }
 });
@@ -92,30 +98,3 @@ export default defineComponent({
     }
 }
 </style>
-
-
-
-
-
-
-
-<!-- <div class="container justify-content-center">
-    <div class="card col-5">
-            <form>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-    </div>
-</div> -->

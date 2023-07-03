@@ -26,7 +26,7 @@
       <label for="recipient-name" class=" row m-auto col-form-label">Grupo Muscular:</label>
       <select type="text" class="row ms-1" v-model="exercicio.idGrupoMuscular">
         <option v-for="item in grupoMuscular" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
-        :value="item.id">{{ item.nome }}</option>
+        :value="item">{{ item.nome }}</option>
       </select>
     </div>
 
@@ -68,7 +68,7 @@
   import ExercicioCLient from '@/client/ExercicioCLient';
   
   export default defineComponent({
-    name: 'ModeloCadastrar',
+    name: 'ExercicioCadastrar',
     data() {
       return {
         exercicio: new ExercicioModel(),
@@ -133,24 +133,30 @@
     //CADASTRAR
     //
     async onClickCadastrar(){
-      try{
-        const response = await ExercicioCLient.cadastrar(this.exercicio);
-        const data = response;
+
+          ExercicioCLient.cadastrar(this.exercicio).then(sucess =>{
+          this.exercicio = new ExercicioModel();
+          console.log(sucess);
+          console.log(this.exercicio);
+          
 
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = "sucess";
+          this.mensagem.mensagem = sucess;
           this.mensagem.titulo = "Exercicio cadastrado com sucesso ";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
-      
-        }
-        catch(error : any){
+        })
+        
+        .catch(error =>{
           console.log(error)
+          console.log(this.exercicio);
+          
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
           this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Exercicio ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        }
+        })
+          
     },
 
     onClickEditar(){

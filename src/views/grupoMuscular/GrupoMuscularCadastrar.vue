@@ -93,23 +93,26 @@
   
       //CADASTRAR
       //
-      async onClickCadastrar(){
-        try{
-          const response = await GrupoMuscularClient.cadastrar(this.grupoMuscular);
-          const data = response;
+      onClickCadastrar(){
 
-          this.mensagem.ativo = true;
-            this.mensagem.mensagem = "sucess";
+          GrupoMuscularClient.cadastrar(this.grupoMuscular).then(sucess =>{
+          this.grupoMuscular = new GrupoMuscularModel();
+            this.mensagem.ativo = true;
+            this.mensagem.mensagem = sucess;
             this.mensagem.titulo = "Grupo Muscular Cadastrado com sucesso!";
             this.mensagem.css = "alert alert-success alert-dismissible fade show";
-        } 
-        catch (error: any) {
-          console.log(error)
+        
+
+          })
+
+        .catch (error=>{
+            console.log(error)
             this.mensagem.ativo = true;
             this.mensagem.mensagem = error;
             this.mensagem.titulo = "Erro, não foi possivel cadastrar o Grupo Muscular ";
             this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        }
+        }) 
+          
       },
   
          

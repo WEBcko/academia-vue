@@ -2,37 +2,41 @@
   <!-- SIDE MENU -->
   <nav class="navbar navbar-expand-lg side-menu py-0">
 
+    <a href="#" class="ham" data-bs-toggle="offcanvas" data-bs-target="#ham-menu" aria-controls="ham-menu"><i
+        class="bi bi-list"></i></a>
+
     <ul class="menu-contain">
+
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="home.html">
+        <a class="menu-button" href="/dashboard">
           <i class="bi bi-house-door-fill fs-5"></i>
           <span class="fw-semibold">HOME</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="alunos.html">
+        <a class="menu-button" href="/usuario">
           <i class="bi bi-person-fill fs-5"></i>
           <span class="fw-semibold">ALUNOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="exercicios.html">
+        <a class="menu-button" href="/treino">
           <i class="bi bi-scooter fs-5"></i>
 
           <span class="fw-semibold">TREINOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="exercicios.html">
+        <a class="menu-button" href="/treinoexercicio">
           <i class="bi bi-clipboard-fill fs-5"></i>
 
-          <span class="fw-semibold">EXERCÍCIOS</span>
+          <span class="fw-semibold">TREINO EXERCÍCIOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="personais.html">
-          <i class="bi bi-people-fill fs-5"></i>
-          <span class="fw-semibold">PERSONAIS</span>
+        <a class="menu-button" href="/exercicio">
+          <i class="bi bi-clipboard-fill fs-5"></i>
+          <span class="fw-semibold">EXERCÍCIOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
@@ -42,6 +46,49 @@
         </a>
       </li>
     </ul>
+
+    <div class="offcanvas offcanvas-top" tabindex="-1" id="ham-menu" aria-labelledby="ham-menu">
+      <div class="offcanvas-body">
+        <li>
+          <a href="/dashboard">
+            <i class="bi bi-house-door-fill fs-5 me-2"></i>
+            <span>HOME</span>
+          </a>
+        </li>
+        <li>
+          <a href="/usuario">
+            <i class="bi bi-person-fill fs-5 me-2"></i>
+            <span>ALUNOS</span>
+          </a>
+        </li>
+        <li>
+          <a href="/treino">
+            <i class="bi bi-scooter fs-5 me-2"></i>
+
+            <span>TREINOS</span>
+          </a>
+        </li>
+        <li>
+          <a href="/treinoexercicio">
+            <i class="bi bi-clipboard-fill fs-5 me-2"></i>
+
+            <span>TREINO EXERCÍCIOS</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bi bi-clipboard-fill fs-5 me-2"></i>
+            <span>EXERCÍCIOS</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bi bi-gear-fill fs-5 me-2"></i>
+            <span>CONFIGURAÇÕES</span>
+          </a>
+        </li>
+      </div>
+    </div>
 
   </nav>
 </template>
@@ -98,6 +145,20 @@
   margin: 0 1.5rem;
 }
 
+.offcanvas {
+  background-color: #004777;
+}
+
+.offcanvas li {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.offcanvas li a {
+  color: white !important;
+  text-decoration: none;
+}
 
 @media only screen and (max-width: 700px) {
   .side-menu {
@@ -105,6 +166,14 @@
     height: 3.5rem;
     top: 0;
     overflow-x: auto;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+  }
+
+  .ham {
+    color: white;
+    font-size: 28px;
   }
 
   .menu-contain {
@@ -151,7 +220,15 @@
     height: 100vh;
   }
 
-  .ham-burguer {
+  .ham {
+    display: none;
+  }
+
+  #ham-menu {
+    display: none;
+  }
+
+  .ham-menu {
     display: none;
   }
 

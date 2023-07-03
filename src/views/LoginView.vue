@@ -8,8 +8,8 @@
                           
                             <form class="f">
                                 <div class="mb-3 ">
-                                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                                    <input v-model="loginRequest.username"  type="email" placeholder="Seu email" class="form-control" id="exampleInputEmail1"
+                                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                                    <input v-model="loginRequest.username"  type="text" placeholder="Seu Username" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 ">
@@ -17,8 +17,8 @@
                                     <input v-model="loginRequest.senha" type="password" placeholder="Sua Senha" class="form-control" id="exampleInputPassword1">
                                 </div>
                                 <div class="mb-3 d-flex justify-content-evenly">
-                                    <button type="submit" class="btn btn-light" @click="onClickLogin()">Entrar</button>
-                                    <RouterLink to="/cadastrar" type="button" class="btn btn-success">Cadastrar</RouterLink>
+                                    <button type="submit" class="btn btn-success" @click.prevent="onClickLogin()">Entrar</button>
+                                    <RouterLink to="/cadastrar" type="button" class="btn btn-light">Cadastrar</RouterLink>
                                 </div>
                             </form>
                         </div>
@@ -38,6 +38,7 @@ import UsuarioClient from '@/client/UsuarioClient';
 import { LoginRequest } from '@/models/LoginRequestModel';
 import setAuthorizationHeader from '../configs-axios/axios-config';
 import AuthClient from "@/client/AuthClient";
+import router from '@/router';
 
 export default defineComponent({
     name: 'LoginView',
@@ -58,7 +59,12 @@ export default defineComponent({
                     // Configure o cabeçalho de autorização com o token JWT
                     setAuthorizationHeader(token);
 
-
+                    if(localStorage.getItem('userToken')){
+                        router.push(`/dashboard`)
+                    }else{
+                        throw Error("Login invalido");
+                    }
+                    
             }).catch(error =>{
                 return Promise.reject(error.response)
             })

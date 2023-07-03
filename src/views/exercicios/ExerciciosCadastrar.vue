@@ -62,6 +62,8 @@
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
   import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
   import GrupoMuscularClient from '@/client/GrupoMuscularClient';
+
+
   import { ExercicioModel } from '@/models/ExercicioModel';
   import ExercicioCLient from '@/client/ExercicioCLient';
   
@@ -126,31 +128,32 @@
           console.log(error)
 
         })
-
     },
 
     //CADASTRAR
     //
-    onClickCadastrar(){
-      ExercicioCLient.cadastrar(this.exercicio).then(sucess =>{
-            this.exercicio = new ExercicioModel();
-            console.log("TA VINDOO");
-            console.log(sucess);
+    async onClickCadastrar(){
+      try{
+        const response = await ExercicioCLient.cadastrar(this.exercicio);
+        const data = response;
 
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = sucess;
+          this.mensagem.mensagem = "sucess";
           this.mensagem.titulo = "Exercicio cadastrado com sucesso ";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
       
-        })
-        .catch(error =>{
+        }
+        catch(error : any){
+
           console.log(error)
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
           this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Exercicio ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        })
+
+        }
+
     },
 
     onClickEditar(){
@@ -198,6 +201,7 @@
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         })
     },
+
 
  }
   

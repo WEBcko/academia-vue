@@ -43,17 +43,17 @@
           <th class="col-md-2">
             <div class="btn-group" role="group">
 
-              <button type="button" class="btn text-align-center col-md-2" @click="editItem(grupoMuscularM)">
+              <!-- <button type="button" class="btn text-align-center col-md-2" @click="editItem(grupoMuscularM)">
                 <span class="badge bg-warning btn text-align-center col">EDITAR2</span>
-              </button>
+              </button> -->
               <RouterLink type="button" class="btn text-align-center col-md-2"
                 :to="{ name: 'grupo-muscular-cadastrar-editar-view', query: { id: item.id, form: 'editar' } }">
                 <span class="badge bg-warning btn text-align-center col">EDITAR</span>
               </RouterLink>
-              <!-- <RouterLink type="button" class="btn text-align-center col-md-2"
+              <RouterLink type="button" class="btn text-align-center col-md-2"
                 :to="{ name: 'grupo-muscular-cadastrar-excluir-view', query: { id: item.id, form: 'excluir' } }">
                 <span class="badge bg-danger btn text-align-center col">EXCLUIR</span>
-              </RouterLink> -->
+              </RouterLink>
             </div>
           </th>
         </tr>
@@ -145,16 +145,16 @@ export default defineComponent({
       console.log("FORA DO FERCH");
     },
   
-    async editItem(grupoMuscularM: GrupoMuscularModel) {
-      // Redirects to the edit page for a specific vehicle brand
-      try {
-        const grupoClient = new GrupoMuscularClient();
-        const editGrupoIds = grupoMuscularM.id;
-        await this.$router.push({ name: "edit-grupoMuscular", params: { editGrupoId: editGrupoIds } });
-      } catch (error) {
-        console.error(error);
-      }
-    },
+    // async editItem(grupoMuscularM: GrupoMuscularModel) {
+    //   // Redirects to the edit page for a specific vehicle brand
+    //   try {
+    //     const grupoClient = new GrupoMuscularClient();
+    //     const editGrupoIds = grupoMuscularM.id;
+    //     await this.$router.push({ name: "edit-grupoMuscular", params: { editGrupoId: editGrupoIds } });
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // },
 
   }
 

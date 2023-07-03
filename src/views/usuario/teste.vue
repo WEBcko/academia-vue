@@ -61,10 +61,6 @@
   <script lang="ts">
   import { computed, defineComponent } from "vue";
   import axios from "axios";
-
-
-  
-
   import NavBar from '@/components/NavBar.vue';
   import { UsuarioModel } from '@/models/UsuarioModel';
   import { UsuarioClient } from '@/client/UsuarioClient';

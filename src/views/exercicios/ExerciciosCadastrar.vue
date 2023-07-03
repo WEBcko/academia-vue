@@ -60,6 +60,7 @@
   
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
+  
   import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
   import GrupoMuscularClient from '@/client/GrupoMuscularClient';
 

@@ -40,7 +40,7 @@ class TreinoClient{
 
     public async editar(id: number, treinoModel: TreinoModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${treinoModel.id}`, treinoModel)).data
+            return (await this.axiosClient.put(`/${id}`, treinoModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

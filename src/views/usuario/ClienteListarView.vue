@@ -15,7 +15,7 @@
 
     <div class="filter-container d-flex align-items-center gap-2">
         <label for="carro-filter">Role</label>
-        <select id="carro-filter" v-model="roleSelecionada" class="form-select">
+        <select id="carro-filter" v-model="selectedRole" class="form-select">
           <option value="">All</option>
           <option v-for="roles in availableRoles" :value="roles">{{ roles }}</option>
         </select>
@@ -39,7 +39,7 @@
         <th scope="col colspan-2" class="p-2">Opção</th>
       </tr>
     </thead>
-  
+   
       <tbody class="table-group-divider">
   
         <tr  v-for="item in usuarioClienteList" :key="item.id" class="col-md-12">
@@ -82,11 +82,11 @@
   <script lang="ts">
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue';
-  import axios from "axios";
   import { UsuarioModel } from '@/models/UsuarioModel';
-  import UsuarioClient from '@/client/UsuarioClient';
+  import { UsuarioClient } from '@/client/UsuarioClient';
   import { UsuarioRole } from '@/models/UsuarioRoleModel'
-
+  import { PageResponse } from '@/models/page-response';
+  import { PageRequest } from '@/models/page-request';
 
   
   export default defineComponent({
@@ -96,52 +96,92 @@
         usuarios: [] as  UsuarioModel[],
 
         usuarioClienteList: new Array<UsuarioModel>(),
-
-        roleSelecionada: null as UsuarioRole | null,
+        testeRole: [] as UsuarioModel[],
+        
+        selectedRole: null as UsuarioRole | null,
         searchQuery: "",
       };
     },
     mounted(){
       this.findAll();
+      this.fetchUser();
     },
     components: {
       NavBar,
     },
 
-    computed:{
-      usuarioFiltro(): UsuarioModel[]{
-        if(
+    computed: {
+      roleFilter(): UsuarioModel[] {
+        if (
           !this.searchQuery &&
-          !this.availableRoles
-          ){
-            console.log("RETURN IF");
-          return this.usuarios;
-        } else{
-          console.log("ENTROU ELSE");
+          !this.selectedRole
+        ) {
+            console.log("DENTRO DO RETURN ROLE FILTRO");
+          return this.testeRole;
+        } else {
+            console.log("DENTRO DO ELSE");
           const lowerCaseQuery = this.searchQuery.toLowerCase();
-          return this.usuarios;
+
+
+          return this.testeRole.filter((user: UsuarioModel) => {
+            const registerDate = new Date(user.dataCadastro);
+
+            const matchesQuery =
+              user.id.toString().trim().toLowerCase().includes(lowerCaseQuery) ||
+              user.nome.toLowerCase().includes(lowerCaseQuery);
+  
+            const matchesRole = !this.selectedRole || user.role === this.selectedRole;
+  
+            // if (this.selectedYear && this.selectedMonth) {
+            //   return (
+            //     matchesQuery &&
+            //     registerYear === this.selectedYear &&
+            //     registerMonth === this.selectedMonth &&
+            //     matchesTipo &&
+            //     matchesCarro
+            //   );
+            console.log("FIM DO ELSE");
+              return matchesQuery && matchesRole;
+          });
         }
       },
-
-
+    
       availableRoles(): string[] {
+        console.log("DENTRO DO AVELIABLE ROLES");
         const roles = Object.values(UsuarioRole);
-        return roles.map((role) => role.toUpperCase());
+        return roles.map((core) => core.toUpperCase());
       },
-      
     },
   
     methods:{
-  
+      async fetchUser() {
+        try {
+            console.log("COMEÇO DO FETCH");
+            
+          const pageRequest = new PageRequest();
+
+
+          console.log("DEPOIS DO PAGEREQUEST");
+            
+          const usuarioClient = new UsuarioClient();
+          const pageResponse: PageResponse<UsuarioModel> = await usuarioClient.findByFiltrosPaginado(pageRequest);
+          this.testeRole = pageResponse.content;
+        } catch (error) {
+          console.error(error);
+          console.log("DENTRO DO ERRO FETCH");
+        }
+        console.log("FORA DO FERCH");
+      },
       findAll(){
-        UsuarioClient.listAll().then(sucess =>{
+        const usuarioClient = new UsuarioClient();
+        usuarioClient.listAll().then(sucess =>{
               console.log("OI")
               this.usuarioClienteList =sucess
           })
           .catch(error =>{
             console.log(error)
           })
-      },
+      }
 
 
 

@@ -51,6 +51,12 @@ const routes: Array<RouteRecordRaw> = [
       },
     ]
   },
+  { 
+    path: '/edit-grupoMuscular/:editGrupoId',
+    name: 'edit-grupoMuscular',
+    component: () => import('../views/grupoMuscular/GrupoMuscularEditar.vue')
+  },
+
 
   {
     path: '/exercicio',
@@ -118,6 +124,34 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "about" */ '../views/usuario/ClienteCadastrar.vue'),
       },
     ]
+  },
+  {
+    path: '/treinoexercicio',
+    name: 'treino-exercicio-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioView.vue')
+  },
+  {
+    path: '/treinoexercicio-cadastrar',
+    name: 'treino-exercicio-cadastrar-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioCadastrar.vue'),
+    children: [
+      {
+        path: '/treinoexercicio-cadastrar',
+        name: 'treino-exercicio-cadastrar-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioCadastrar.vue'),
+      },
+      {
+        path: '/treinoexercicio-cadastrar',
+        name: 'treino-exercicio-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioCadastrar.vue'),
+      },
+    ]
+  },
+
+  {
+    path: '/teste',
+    name: 'teste-vue',
+    component: () => import(/* webpackChunkName: "about" */ '../views/usuario/teste.vue')
   },
 
 ]

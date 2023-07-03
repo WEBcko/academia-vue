@@ -10,7 +10,15 @@
             <button type="button" class="btn btn-success offset-md-5">Cadastrar</button>
         </router-link>  
     </div>
-  
+    <div class="header d-flex align-content-start justify-content-between m-0">
+                <p class="title-pages">Exercicios</p>
+                <div class="search-container">
+                <input type="text" class="search-input" placeholder="Procurar pelo Nome ..."
+                    v-model="searchQuery" />
+                <i class="bi bi-search search-icon"></i>
+                </div>
+        </div>
+
     <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
     <table class="table">
     <thead>
@@ -25,7 +33,8 @@
   
       <tbody class="table-group-divider">
   
-        <tr v-for="item in exercicioList" :key="item.id" class="col-md-12">
+        <tr v-for="item in roleFilter" :key="item.id" class="col-md-12">
+
           <th class="col-md-1">{{ item.id }}</th>
           <th class="col-md-1">
               <span v-if="item.ativo" class="badge bg-primary text-align-center col"> ATIVO</span> 
@@ -60,35 +69,81 @@
   <script lang="ts">
   import { defineComponent } from 'vue';
   import { ExercicioModel } from '@/models/ExercicioModel';
-  import ExercicioClient from '@/client/ExercicioCLient';
+  import { ExercicioClient } from '@/client/ExercicioCLient';
+  import { PageResponse } from '@/models/page-response';
+  import { PageRequest } from '@/models/page-request';
+
   import NavBar from '@/components/NavBar.vue';
 
   
   export default defineComponent({
-    name: 'ModeloListaView',
+    name: 'ExercicioListaView',
     data() {
       return {
-        exercicioList: new Array<ExercicioModel>(),
+
+        exercicios: [] as ExercicioModel[],
+        searchQuery: "",
       };
     },
     mounted(){
-      this.findAll();
+      this.fetchUser();
+
     },
     components: {
       NavBar,
     },
+    computed:{
+      roleFilter(): ExercicioModel[] {
+      if (
+        !this.searchQuery
+      ) {
+        console.log("DENTRO DO RETURN ROLE FILTRO");
+        return this.exercicios;
+      } else {
+        console.log("DENTRO DO ELSE");
+        const lowerCaseQuery = this.searchQuery.toLowerCase();
+
+
+        return this.exercicios.filter((user: ExercicioModel) => {
+          const registerDate = new Date(user.dataCadastro);
+
+          const matchesQuery =
+            user.id.toString().trim().toLowerCase().includes(lowerCaseQuery) ||
+            user.nome.toLowerCase().includes(lowerCaseQuery);
+
+          console.log("FIM DO ELSE");
+          return matchesQuery;
+        });
+      }
+    },
+
+    availableRoles(): string[] {
+        console.log("DENTRO DO AVELIABLE ROLES");
+        const roles = Object.values(ExercicioModel);
+        return roles.map((core) => core.toUpperCase());
+      },
+
+    },
   
     methods:{
   
-      findAll(){
-        ExercicioClient.listAll().then(sucess =>{
-              console.log("OI")
-              this.exercicioList =sucess
-          })
-          .catch(error =>{
-            console.log(error)
-          })
+      async fetchUser() {
+      try {
+        console.log("COMEÇO DO FETCH");
+
+        const pageRequest = new PageRequest();
+
+        console.log("DEPOIS DO PAGEREQUEST");
+
+        const exerClient = new ExercicioClient();
+        const pageResponse: PageResponse<ExercicioModel> = await exerClient.findByFiltrosPaginado(pageRequest);
+        this.exercicios = pageResponse.content;
+      } catch (error) {
+        console.error(error);
+        console.log("DENTRO DO ERRO FETCH");
       }
+      console.log("FORA DO FERCH");
+    },
     }
   
   });

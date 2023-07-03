@@ -20,7 +20,8 @@
   
     <div class="nome col">
       <label for="recipient-name" class=" row m-auto col-form-label">Nome do Treino:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="treino.codigOrdem">
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="treino.codigoOrdem">
+
     </div>
   
     <div class="col d-flex align-items-center justify-content-center">

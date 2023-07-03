@@ -3,7 +3,7 @@ import { AbstractEntity } from "./AbstractEntity";
 
 export class TreinoModel extends AbstractEntity{
 
-    codigOrdem! : string
+    codigoOrdem! : string
 
     constructor(){
         super();

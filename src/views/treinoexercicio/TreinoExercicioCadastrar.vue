@@ -21,13 +21,13 @@
       <label for="recipient-name" class=" row m-auto col-form-label">Treino:</label>
       <select type="text" class="row ms-1" v-model="treinoExercicio.idTreino">
         <option v-for="item in treino" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
-        :value="item.id">{{ item.codigOrdem }}</option>
+        :value="item.id">{{ item.codigoOrdem }}</option>
       </select>
     </div>
 
     <div class="nome col">
       <label for="recipient-name" class=" row m-auto col-form-label">Exercicio:</label>
-      <select type="text" class="row ms-1" v-model="treinoExercicio.idExercicios">
+      <select type="text" class="row ms-1" v-model="treinoExercicio.idExercicio">
         <option v-for="item in exercicio" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
         :value="item.id">{{ item.nome }}</option>
       </select>
@@ -78,10 +78,13 @@
   
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
+
   import { ExercicioModel } from '@/models/ExercicioModel';
   import ExercicioCLient from '@/client/ExercicioCLient';
+
   import { TreinoModel } from '@/models/TreinoModel';
   import TreinoClient from '@/client/TreinoClient';
+
   import { TreinoExercicioModel } from '@/models/TreinoExercicio';
   import TreinoExercicioClient from '@/client/TreinoExercicioClient';
   
@@ -165,26 +168,27 @@
 
     //CADASTRAR
     //
-    onClickCadastrar(){
-      TreinoExercicioClient.cadastrar(this.treinoExercicio).then(sucess =>{
-            this.treinoExercicio = new TreinoExercicioModel();
-            console.log("TA VINDOO");
-            console.log(sucess);
+    async onClickCadastrar(){
+      try{
+        const response = await TreinoExercicioClient.cadastrar(this.treinoExercicio);
+        const data = response;
 
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = sucess;
+          this.mensagem.mensagem = "sucess";
           this.mensagem.titulo = "Treino-Exercicio cadastrado com sucesso ";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
       
-        })
-        .catch(error =>{
+        }
+        catch(error : any){
           console.log(error)
+          console.log(typeof(this.treinoExercicio.idExercicio.id));
+          console.log(typeof(this.treinoExercicio.idTreino.id));
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Treino-Exercicio ";
+          this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Exercicio ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        })
+        }
     },
 
     onClickEditar(){

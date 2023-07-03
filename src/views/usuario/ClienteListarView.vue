@@ -44,6 +44,7 @@
   
         <tr  v-for="item in usuarioClienteList" :key="item.id" class="col-md-12">
           <th class="col-md-1">{{ item.nome }}</th>
+
           <th class="col-md-1">{{ item.role }}</th>
           <th class="col-md-1">
               <span v-if="item.ativo" class="badge bg-primary text-align-center col"> ATIVO</span> 
@@ -58,11 +59,13 @@
           <th class="col-md-2">
             <div class="btn-group" role="group">
               <RouterLink type="button" class="btn text-align-center col-md-2" 
+
                 :to="{name: 'usuario-cadastrar-editar-view', query: {id: item.id, form: 'editar'}}">
                 <span class="badge bg-warning btn text-align-center col">EDITAR</span>
               </RouterLink>
               <RouterLink type="button" class="btn text-align-center col-md-2" 
                 :to="{name: 'usuario-cadastrar-excluir-view', query: {id: item.id, form: 'excluir'}}">
+
                 <span class="badge bg-danger btn text-align-center col">EXCLUIR</span>
               </RouterLink>
             </div>
@@ -82,6 +85,9 @@
   <script lang="ts">
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue';
+
+  import axios from "axios";
+
   import { UsuarioModel } from '@/models/UsuarioModel';
   import { UsuarioClient } from '@/client/UsuarioClient';
   import { UsuarioRole } from '@/models/UsuarioRoleModel'
@@ -122,6 +128,10 @@
             console.log("DENTRO DO ELSE");
           const lowerCaseQuery = this.searchQuery.toLowerCase();
 
+          return this.usuarios;
+
+        }
+      },
 
           return this.testeRole.filter((user: UsuarioModel) => {
             const registerDate = new Date(user.dataCadastro);

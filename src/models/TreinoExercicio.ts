@@ -4,7 +4,7 @@ import { TreinoModel } from "./TreinoModel";
 
 export class TreinoExercicioModel extends AbstractEntity{
     idTreino! : TreinoModel
-    idExercicios! : ExercicioModel
+    idExercicio! : ExercicioModel
     dificuldade! : string
     peso! : number
     series! : number

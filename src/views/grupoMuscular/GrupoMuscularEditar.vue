@@ -48,7 +48,7 @@
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
   import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
-  import { GrupoMuscularClient } from '@/client/GrupoMuscularClient';
+  import  GrupoMuscularClient  from '@/client/GrupoMuscularClient';
   
   export default defineComponent({
     name: 'GrupoMuscularCadastrar',
@@ -71,15 +71,12 @@
       form(){
         return this.$route.query.form
       },
-      grupo(){
-        return new GrupoMuscularClient();
-      }
     },
     mounted() {
       
-      //  if(this.id !== undefined){
-      //   this.findById(Number(this.id));
-      //  }   
+       if(this.id !== undefined){
+        this.findById(Number(this.id));
+       }   
     },
     components: {
       NavBar,
@@ -138,21 +135,21 @@
       //
 
 
-      // findById(id: number){
-      //     GrupoMuscularClient.findById(id).then(sucess =>{
-      //     this.grupoMuscular = sucess
+      findById(id: number){
+          GrupoMuscularClient.findById(id).then(sucess =>{
+          this.grupoMuscular = sucess
             
-      // })
-      // .catch(error =>{
-      //     console.log(error)
+      })
+      .catch(error =>{
+          console.log(error)
   
-      //     this.mensagem.ativo = true;
-      //     this.mensagem.mensagem = error;
-      //     this.mensagem.titulo = "Erro, nao foi possivel buscar pelo ID ";
-      //     this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-      // })
+          this.mensagem.ativo = true;
+          this.mensagem.mensagem = error;
+          this.mensagem.titulo = "Erro, nao foi possivel buscar pelo ID ";
+          this.mensagem.css = "alert alert-danger alert-dismissible fade show";
+      })
   
-      // },
+      },
     }
   
   });

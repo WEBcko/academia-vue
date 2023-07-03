@@ -19,14 +19,17 @@
     </div>
 
     <div class="filter-container d-flex align-items-center gap-2">
+
       <label for="user-filter">Role</label>
       <select id="user-filter" v-model="selectedRole" class="form-select">
         <option value="">All</option>
         <option v-for="roles in availableRoles" :value="roles">{{ roles }}</option>
       </select>
+
     </div>
 
     <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
+
       <table class="table">
         <thead>
           <tr>
@@ -79,6 +82,7 @@ import { UsuarioClient } from '@/client/UsuarioClient';
 import { UsuarioRole } from '@/models/UsuarioRoleModel';
 import { PageResponse } from '@/models/page-response';
 import { PageRequest } from '@/models/page-request'
+
 
 
 export default defineComponent({

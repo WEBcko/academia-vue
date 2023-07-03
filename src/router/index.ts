@@ -57,6 +57,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/grupoMuscular/GrupoMuscularEditar.vue')
   },
 
+
   {
     path: '/exercicio',
     name: 'exercicio-view',

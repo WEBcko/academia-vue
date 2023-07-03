@@ -22,6 +22,7 @@
       <label for="recipient-name" class=" row m-auto col-form-label">Nome do Grupo Muscular:</label>
       <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="grupoMuscular.nome" v-if="this.form === undefined">
       <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="grupoMuscular.nome" v-if="this.form === 'editar'">
+
     </div>
   
     <div class="col d-flex align-items-center justify-content-center">
@@ -53,13 +54,12 @@
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
   import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
   import  GrupoMuscularClient  from '@/client/GrupoMuscularClient';
-  
+
   export default defineComponent({
     name: 'GrupoMuscularCadastrar',
     data() {
       return {
         grupoMuscular: new GrupoMuscularModel(),
-
         grupoNome: "",
         mensagem: {
           ativo: false as boolean,
@@ -79,6 +79,7 @@
       // grupo(){
       //   return new GrupoMuscularClient();
       // }
+
     },
     mounted() {
       
@@ -90,10 +91,10 @@
       NavBar,
     },
     methods:{
-  
       //CADASTRAR
       //
       onClickCadastrar(){
+
 
           GrupoMuscularClient.cadastrar(this.grupoMuscular).then(sucess =>{
           this.grupoMuscular = new GrupoMuscularModel();
@@ -139,9 +140,6 @@
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     },  
-      //FIND BY ID
-      //
-
 
       findById(id: number){
           GrupoMuscularClient.findById(id).then(sucess =>{

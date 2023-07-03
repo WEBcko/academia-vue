@@ -61,6 +61,23 @@
       </tbody>
     </table>
   </div>
+
+  <div class="pagination-container align-self-end">
+      <ul class="pagination">
+        <li class="page-item" :class="{ disabled: currentPage === 0 }">
+          <a class="page-link" href="#" aria-label="Previous" @click="previousPage"
+            style="color: #3C3C43; background-color: #B5C2C9;">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" :disabled="roleFilter.length < pageSize">
+          <a class="page-link" href="#" aria-label="Next" @click="nextPage"
+            style="color: #3C3C43; background-color: #B5C2C9;">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 </template>
 
 <script lang="ts">
@@ -82,6 +99,8 @@ export default defineComponent({
 
       grupoMuscularM: [] as GrupoMuscularModel[],
       searchQuery: "",
+      currentPage: 0,
+      pageSize: 5,
 
     };
   },
@@ -134,6 +153,9 @@ export default defineComponent({
 
         const pageRequest = new PageRequest();
 
+        pageRequest.currentPage= this.currentPage;
+        pageRequest.pageSize =this.pageSize;
+
         console.log("DEPOIS DO PAGEREQUEST");
 
         const grupoClient = new GrupoMuscularClient();
@@ -146,16 +168,20 @@ export default defineComponent({
       console.log("FORA DO FERCH");
     },
   
-    // async editItem(grupoMuscularM: GrupoMuscularModel) {
-    //   // Redirects to the edit page for a specific vehicle brand
-    //   try {
-    //     const grupoClient = new GrupoMuscularClient();
-    //     const editGrupoIds = grupoMuscularM.id;
-    //     await this.$router.push({ name: "edit-grupoMuscular", params: { editGrupoId: editGrupoIds } });
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // },
+    previousPage() {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+        this.fetchUser();
+      }
+    },
+
+    // Goes to the next page of car results
+    nextPage() {
+      if (this.roleFilter.length === this.pageSize) {
+        this.currentPage++;
+        this.fetchUser();
+      }
+    },
 
   }
 

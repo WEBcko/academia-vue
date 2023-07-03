@@ -32,7 +32,9 @@ import { PageResponse } from '@/models/page-response';
 
     public async cadastrar(exercicioModel : ExercicioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('', exercicioModel)).data
+            console.log(exercicioModel);
+            
+            return (await this.axiosClient.post<string>(``, exercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

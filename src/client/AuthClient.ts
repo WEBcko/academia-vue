@@ -13,9 +13,9 @@ class AuthClient {
     }
 
 
-    public async login(loginRequest : LoginRequest) : Promise<string>{
+    public async login(loginRequest : LoginRequest) : Promise<any>{
         try{
-            return (await this.axiosClient.post<string>('/login', loginRequest)).data
+            return (await this.axiosClient.post<any>('/login', loginRequest)).data
         }catch(error : any){
             return Promise.reject(error.response);
         }

@@ -2,12 +2,16 @@ import { UsuarioModel } from '@/models/UsuarioModel';
 import axios, {AxiosInstance} from 'axios';
 
 class UsuarioClient{
+    public token = localStorage.getItem('userToken');
+
     private axiosClient : AxiosInstance;
 
     constructor(){
         this.axiosClient = axios.create({
             baseURL:"http://localhost:8080/api/usuario",
-            headers: {'Content-type' : 'application/json'}
+            headers: {'Content-type' : 'application/json', 'Authorization' : `Bearer ${localStorage.getItem('userToken')}`},
+        
+            //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         });
     }
 

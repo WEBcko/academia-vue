@@ -13,9 +13,9 @@
   <div class="conteudo-Dash row">
 
     <div class="botoes col-md-4">
-      <router-link to="" class="col col-md-1 ">
-        <button type="button" class="btn btn-success">Calendario</button>
-      </router-link>
+      <!-- <router-link to="" class="col col-md-1 "> -->
+        <button type="button" @click="teste()" class="btn btn-success">Calendario</button>
+      <!-- </router-link> -->
       <router-link to="" class="col col-md-1">
         <button type="button" class="btn btn-success">Notificação</button>
       </router-link>
@@ -73,6 +73,8 @@ import SideBarFixed from '@/components/SideBarFixed.vue';
 //import { Marca } from '@/model/marca';
 
 import { onMounted, reactive, toRefs } from 'vue';
+import GrupoMuscularClient from '@/client/GrupoMuscularClient';
+import UsuarioClient from '@/client/UsuarioClient';
 
 export default defineComponent({
   name: 'VeiculoListaView',
@@ -85,7 +87,9 @@ export default defineComponent({
     NavBar,
     SideBarFixed,
 },
-
+  mounted(){
+   
+  },
   methods:{
 
     abreModal(){
@@ -102,6 +106,13 @@ export default defineComponent({
     },
     deletarMarca(){
 
+    },
+    teste(){
+      UsuarioClient.listAll().then(success =>{
+        console.log(success)
+      }).catch(error =>{
+        console.log(error)
+      })
     }
   }
 

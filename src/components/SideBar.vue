@@ -3,35 +3,35 @@
   <nav class="side-menu">
     <ul class="menu-contain">
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="home.html">
+        <a class="menu-button" href="/dashboard">
           <i class="bi bi-house-door-fill fs-5"></i>
           <span class="fw-semibold">HOME</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="alunos.html">
+        <a class="menu-button" href="/usuario">
           <i class="bi bi-person-fill fs-5"></i>
           <span class="fw-semibold">ALUNOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="exercicios.html">
+        <a class="menu-button" href="/treino">
           <i class="bi bi-scooter fs-5"></i>
 
           <span class="fw-semibold">TREINOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="exercicios.html">
+        <a class="menu-button" href="/treinoexercicio">
           <i class="bi bi-clipboard-fill fs-5"></i>
 
-          <span class="fw-semibold">EXERCÍCIOS</span>
+          <span class="fw-semibold">TREINO-EXER</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" href="personais.html">
-          <i class="bi bi-people-fill fs-5"></i>
-          <span class="fw-semibold">PERSONAIS</span>
+        <a class="menu-button" href="/exercicio">
+          <i class="bi bi-clipboard-fill fs-5"></i>
+          <span class="fw-semibold">EXERCICIOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">

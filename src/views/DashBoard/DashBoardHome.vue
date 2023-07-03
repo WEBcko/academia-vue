@@ -1,4 +1,6 @@
 <template>
+  <SideBar></SideBar>
+
 <nav class="navbar navbar-expand-lg  navBar-Dash">
   <div class="container-fluid fs-5 navBar-Dash">
     <span class="col-md-10 text-start" > Olá, admin</span>
@@ -6,7 +8,7 @@
   </div>
 </nav>
 
-<div class="tela">
+<div class="tela col-md-11 offset-md-1">
   <div class="conteudo-Dash row mt-5 ms-5">
 
     <div class="col-md-9 conteudo">
@@ -31,15 +33,6 @@
           </router-link>
         </div>
       </div>
-
-      <div class="bodyNotificacao col">
-          
-          <div class="notificacao1">
-            <header class="tituloNotificacao">Notificacao</header>
-            <span class="bodyNotificacao">Aluno novo cadastrado</span>
-          </div>
-
-        </div>
 
     </div>
   </div>
@@ -107,8 +100,9 @@
 
 import { defineComponent } from 'vue';
 import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
-import FullCalendar from '@/views/DashBoard/Calendario.vue'
-import Formulario from '@/components/DashBoardComponents/Formulario.vue'
+import FullCalendar from '@/views/DashBoard/Calendario.vue';
+import Formulario from '@/components/DashBoardComponents/Formulario.vue';
+import SideBar from '@/components/SideBar.vue';
 
 
 export default defineComponent({
@@ -123,6 +117,7 @@ export default defineComponent({
     NavBar,
     FullCalendar,
     Formulario,
+    SideBar,
 },
 
   methods:{

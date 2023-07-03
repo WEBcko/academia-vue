@@ -4,7 +4,7 @@
   <div class="container col-md-8 corTabela"> 
 
     <div class="row align-items-center"> 
-      <h1 class="col mt-2">Cadastrar Exercicio</h1>
+      <h1 class="col mt-2">Cadastrar Usuario</h1>
     </div>
 
     <div v-if="mensagem.ativo" class="row">
@@ -17,20 +17,40 @@
     </div>
 
     <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">Nome do Exercicio:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="exercicio.nome">
+      <label for="recipient-name" class=" row m-auto col-form-label">Nome do Usuario:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.nome">
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">CPF:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.cpf">
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">NUMERO:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.telefone">
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">email:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.email">
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">senha:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.senha">
     </div>
     
     <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">Grupo Muscular:</label>
-      <select type="text" class="row ms-1" v-model="exercicio.idGrupoMuscular">
-        <option v-for="item in grupoMuscular" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
-        :value="item.id">{{ item.nome }}</option>
+      <label for="recipient-name" class=" row m-auto col-form-label">Role:</label>
+      <select type="text" class="row ms-1" v-model="usuario.role">
+        <option v-for="item in availableRoles" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+        :value="item">{{ item }}</option>
       </select>
     </div>
 
     <div class="col d-flex align-items-center justify-content-center">
-    <router-link class="col col-md-1" to="/exercicio">
+    <router-link class="col col-md-1" to="/usuario">
         <button type="button" class="btn btn-success">Voltar</button>
     </router-link>
 
@@ -63,14 +83,22 @@
   import GrupoMuscularClient from '@/client/GrupoMuscularClient';
   import { ExercicioModel } from '@/models/ExercicioModel';
   import ExercicioCLient from '@/client/ExercicioCLient';
+
+  import  UsuarioClient  from '@/client/UsuarioClient';
+  import { UsuarioModel } from '@/models/UsuarioModel';
+  import { UsuarioRole } from '@/models/UsuarioRoleModel';
+
   
   export default defineComponent({
-    name: 'ModeloCadastrar',
+    name: 'UsuarioCadastrar',
     data() {
       return {
-        exercicio: new ExercicioModel(),
-        grupoMuscular: new Array<GrupoMuscularModel>(),
-        
+
+        usuario: new UsuarioModel(),
+        selectedRole: null as UsuarioRole | null,
+
+        // usuarioRole: new 
+                
         mensagem: {
         ativo: false as boolean,
         titulo: "" as string,
@@ -88,22 +116,28 @@
     },
     form(){
       return this.$route.query.form
-    }
+    },
+
+    availableRoles(): string[] {
+      console.log("DENTRO DO AVELIABLE ROLES");
+      const roles = Object.values(UsuarioRole);
+      return roles.map((core) => core.toUpperCase());
+    },
   },
   mounted() {
     
     if(this.id !== undefined){
      this.findById(Number(this.id));
     }
-
-    this.findAllGrupoMuscular();   
+ 
  },
+
  methods:{
     //FIND BY ID
     //
     findById(id: number){
-        ExercicioCLient.findById(id).then(sucess =>{
-        this.exercicio = sucess
+        UsuarioClient.findById(id).then(sucess =>{
+        this.usuario = sucess
           
     })
     .catch(error =>{
@@ -116,29 +150,17 @@
     })
     },
 
-    findAllGrupoMuscular(){
-      GrupoMuscularClient.listAll().then(sucess =>{
-        this.grupoMuscular = sucess;
-        console.log(sucess);
-      })
-      .catch(error =>{
-          console.log(error)
-
-        })
-
-    },
-
     //CADASTRAR
     //
     onClickCadastrar(){
-      ExercicioCLient.cadastrar(this.exercicio).then(sucess =>{
-            this.exercicio = new ExercicioModel();
+      UsuarioClient.cadastrar(this.usuario).then(sucess =>{
+            this.usuario = new UsuarioModel();
             console.log("TA VINDOO");
             console.log(sucess);
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Exercicio cadastrado com sucesso ";
+          this.mensagem.titulo = "Usuario cadastrado com sucesso ";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
       
         })
@@ -147,22 +169,22 @@
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Exercicio ";
+          this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Usuario ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         })
     },
 
     onClickEditar(){
       console.log("Antes do metodo");
-      ExercicioCLient.editar(this.exercicio.id, this.exercicio)
+      UsuarioClient.editar(this.usuario.id, this.usuario)
         .then(sucess => {
           console.log("Depois");
-          this.exercicio = new ExercicioModel()
+          this.usuario = new UsuarioModel()
           console.log(sucess);
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Exercicio Editado com sucesso!";
+          this.mensagem.titulo = "Usuario Editado com sucesso!";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
          
         })
@@ -170,7 +192,7 @@
           console.log(error)
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel editar o Exercicio ";
+          this.mensagem.titulo = "Erro, não foi possivel editar o Usuario ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     },
@@ -178,24 +200,7 @@
     //EXCLUIR
     //
     onClickExcluir(){
-      ExercicioCLient.deletar(this.exercicio.id).then(sucess =>{
-            this.exercicio = new ExercicioModel();
 
-            this.mensagem.ativo = true;
-            this.mensagem.mensagem = sucess;
-            this.mensagem.titulo = "Exercicio Excluido com sucesso!";
-            this.mensagem.css = "alert alert-success alert-dismissible fade show";
-
-            //this.$router.push({name: 'marca-lista-view'})
-        })
-        .catch(error =>{
-          console.log(error)
-
-          this.mensagem.ativo = true;
-          this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, Não foi possivel excluir o Exercicio";
-          this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        })
     },
 
  }

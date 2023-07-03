@@ -1,10 +1,7 @@
-
-
-
-
 <template>
 
     <NavBar></NavBar>
+    <SideBar></SideBar>
     
     <div class="container">
     
@@ -63,12 +60,14 @@
     import NavBar from '@/components/NavBar.vue';
     import { TreinoModel } from '@/models/TreinoModel';
     import TreinoClient from '@/client/TreinoClient';
+    import SideBar from '@/components/SideBar.vue';
     
     
     export default defineComponent({
         name:"TreinoView",
         components: {
-        NavBar
+        NavBar,
+        SideBar
         },
         data(){
             return{

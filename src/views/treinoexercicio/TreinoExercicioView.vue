@@ -1,5 +1,6 @@
 <template>
   <NavBar></NavBar>
+  <SideBar></SideBar>
 
   <div class="container">
 
@@ -77,6 +78,7 @@ import { TreinoExercicioModel } from '@/models/TreinoExercicio';
 import { TreinoExercicioClient } from '@/client/TreinoExercicioClient';
 import { PageResponse } from '@/models/page-response';
 import { PageRequest } from '@/models/page-request'
+import SideBar from '@/components/SideBar.vue';
 
 
 
@@ -96,6 +98,7 @@ export default defineComponent({
   },
   components: {
     NavBar,
+    SideBar
   },
 
   computed:{

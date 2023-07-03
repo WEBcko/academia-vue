@@ -1,5 +1,5 @@
 <template>
-
+    <SideBar></SideBar>
     <NavBar></NavBar>
   
   <div class="container">
@@ -74,6 +74,7 @@
   import { PageRequest } from '@/models/page-request';
 
   import NavBar from '@/components/NavBar.vue';
+  import SideBar from '@/components/SideBar.vue';
 
   
   export default defineComponent({
@@ -91,6 +92,7 @@
     },
     components: {
       NavBar,
+      SideBar,
     },
     computed:{
       roleFilter(): ExercicioModel[] {

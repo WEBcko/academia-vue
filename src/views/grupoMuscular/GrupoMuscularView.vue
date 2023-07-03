@@ -1,5 +1,6 @@
 <template>
   <NavBar></NavBar>
+  <SideBar></SideBar>
 
   <div class="container">
 
@@ -87,12 +88,14 @@ import { GrupoMuscularClient } from '@/client/GrupoMuscularClient';
 import NavBar from '@/components/NavBar.vue';
 import { PageResponse } from '@/models/page-response';
 import { PageRequest } from '@/models/page-request'
+import SideBar from '@/components/SideBar.vue';
 
 
 export default defineComponent({
   name: "GrupoMuscularView",
   components: {
-    NavBar
+    NavBar,
+    SideBar
   },
   data() {
     return {

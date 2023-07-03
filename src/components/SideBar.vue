@@ -29,14 +29,13 @@
       <li class="menu-opc text-center w-100">
         <a class="menu-button" href="/treinoexercicio">
           <i class="bi bi-clipboard-fill fs-5"></i>
-
           <span class="fw-semibold">TREINO EXERCÍCIOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">
         <a class="menu-button" href="/exercicio">
           <i class="bi bi-clipboard-fill fs-5"></i>
-          <span class="fw-semibold">EXERCÍCIOS</span>
+          <span class="fw-semibold">EXERCICIOS</span>
         </a>
       </li>
       <li class="menu-opc text-center w-100">

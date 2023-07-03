@@ -24,7 +24,7 @@ class ConfiguracaoCLient{
 
     public async listAll(): Promise<ConfiguracaoModel[]>{
         try{
-            return (await this.axiosClient.get<ConfiguracaoModel[]>("/listar")).data
+            return (await this.axiosClient.get<ConfiguracaoModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -32,7 +32,7 @@ class ConfiguracaoCLient{
 
     public async cadastrar(configuracaoModel : ConfiguracaoModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', configuracaoModel)).data
+            return (await this.axiosClient.post('', configuracaoModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

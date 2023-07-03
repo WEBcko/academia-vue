@@ -24,7 +24,7 @@ class TreinoExercicioClient{
 
     public async listAll(): Promise<TreinoExercicioModel[]>{
         try{
-            return (await this.axiosClient.get<TreinoExercicioModel[]>("/listar")).data
+            return (await this.axiosClient.get<TreinoExercicioModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -32,14 +32,14 @@ class TreinoExercicioClient{
 
     public async cadastrar(treinoExercicioModel : TreinoExercicioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', treinoExercicioModel)).data
+            return (await this.axiosClient.post('', treinoExercicioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
 
-    public async editar(treinoExercicioModel : TreinoExercicioModel) : Promise<string>{
+    public async editar(id: number, treinoExercicioModel : TreinoExercicioModel) : Promise<string>{
         try{
             return (await this.axiosClient.put(`/${treinoExercicioModel.id}`, treinoExercicioModel)).data
         }catch(error:any){

@@ -14,4 +14,9 @@ export class UsuarioModel extends AbstractEntity{
     senha! : string
     role! : UsuarioRole
 
+    constructor(){
+        super();
+        this.ativo=true;
+    }
+
 }

@@ -23,7 +23,7 @@ class TreinoClient{
 
     public async listAll(): Promise<TreinoModel[]>{
         try{
-            return (await this.axiosClient.get<TreinoModel[]>("/listar")).data
+            return (await this.axiosClient.get<TreinoModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -31,16 +31,16 @@ class TreinoClient{
 
     public async cadastrar(treinoModel : TreinoModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', treinoModel)).data
+            return (await this.axiosClient.post('', treinoModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
 
-    public async editar(entradaSaidaModel: TreinoModel) : Promise<string>{
+    public async editar(id: number, treinoModel: TreinoModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${entradaSaidaModel.id}`, entradaSaidaModel)).data
+            return (await this.axiosClient.put(`/${treinoModel.id}`, treinoModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

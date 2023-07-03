@@ -36,8 +36,8 @@ import { UsuarioModel } from '@/models/UsuarioModel';
 import { defineComponent } from 'vue';
 import UsuarioClient from '@/client/UsuarioClient';
 import { LoginRequest } from '@/models/LoginRequestModel';
-import setAuthorizationHeader from '../configs-axios/axios-config';
 import AuthClient from "@/client/AuthClient";
+import setAuthorizationHeader  from "@/client/axios-config";
 
 export default defineComponent({
     name: 'LoginView',

@@ -127,7 +127,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/usuario-treinoexercicio',
     name: 'usuario-treinoexercicio-view',
-    component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioTESTE.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioView.vue'),
   },
   {
     path: '/usuario-treino',
@@ -153,6 +153,29 @@ const routes: Array<RouteRecordRaw> = [
         path: '/treinoexercicio-cadastrar',
         name: 'treino-exercicio-cadastrar-excluir-view',
         component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioCadastrar.vue'),
+      },
+    ]
+  },
+
+  {
+    path: '/entradasaida',
+    name: 'entradasaidaView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/entradaSaida/entradaSaidaView.vue')
+  },
+  {
+    path: '/entradasaidaCadastrar',
+    name: 'entradasaidaCadastrar',
+    component: () => import(/* webpackChunkName: "about" */ '../views/entradaSaida/entradaSaidaCadastrar.vue'),
+    children: [
+      {
+        path: '/entradasaidaCadastrar',
+        name: 'entrada-cadastrar-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/entradaSaida/entradaSaidaCadastrar.vue'),
+      },
+      {
+        path: '/entradasaidaCadastrar',
+        name: 'entrada-cadastrar-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/entradaSaida/entradaSaidaCadastrar.vue'),
       },
     ]
   },

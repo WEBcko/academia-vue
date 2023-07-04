@@ -1,7 +1,10 @@
 import { EntradaSaidaModel } from '@/models/EntradaSaidaModel';
 import axios, {AxiosInstance} from 'axios';
+import { PageRequest } from '@/models/page-request';
+import { PageResponse } from '@/models/page-response';
 
-class EntradaSaidaClient{
+export class EntradaSaidaClient{
+    
     private axiosClient : AxiosInstance;
 
     constructor(){
@@ -37,7 +40,7 @@ class EntradaSaidaClient{
     }
 
 
-    public async editar(entradaSaidaModel: EntradaSaidaModel) : Promise<string>{
+    public async editar(id:number, entradaSaidaModel: EntradaSaidaModel) : Promise<string>{
         try{
             return (await this.axiosClient.put(`/${entradaSaidaModel.id}`, entradaSaidaModel)).data
         }catch(error:any){
@@ -52,6 +55,15 @@ class EntradaSaidaClient{
             return Promise.reject(error.response)
         }
     }
+
+    public async findByFiltrosPaginado(pageRequest: PageRequest): Promise<PageResponse<EntradaSaidaModel>> {
+		try {
+
+			return (await this.axiosClient.get<PageResponse<EntradaSaidaModel>>(`/role`)).data
+		} catch (error:any) { 
+			return Promise.reject(error.response) 
+		}
+	}
 
 
 }

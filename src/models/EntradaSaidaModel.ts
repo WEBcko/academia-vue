@@ -3,8 +3,8 @@ import { UsuarioModel } from "./UsuarioModel";
 
 
 export class EntradaSaidaModel extends AbstractEntity{
-    cliente! : UsuarioModel
-    personal! : UsuarioModel
+    idCliente! : UsuarioModel
+    idPersonal! : UsuarioModel
     horaEntrada! : Date
     horaSaida! : Date
 }

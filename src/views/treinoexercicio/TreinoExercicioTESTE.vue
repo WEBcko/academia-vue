@@ -39,7 +39,7 @@
   
           <tbody class="table-group-divider">
   
-            <tr v-for="item in treinoFilter" :key="item.id" class="col-md-12">
+            <tr v-for="item in treinoFilter" :key="item.idTreino.id" class="col-md-12">
               <th class="col-md-1">{{ item.id }}</th>
               <th class="col-md-1">
                 <span v-if="item.ativo" class="badge bg-primary text-align-center col"> ATIVO</span>
@@ -81,6 +81,7 @@
   import { PageResponse } from '@/models/page-response';
   import { PageRequest } from '@/models/page-request'
   import SideBar from '@/components/SideBar.vue';
+  import { TreinoModel } from '@/models/TreinoModel';
   
   
   
@@ -91,7 +92,9 @@
   
         // treinoExercicioList: new Array<TreinoExercicioModel>(),
         treinoExer: [] as TreinoExercicioModel[],
+        treinoModal: [] as TreinoModel[],
         searchQuery: "",
+        
               
       };
     },
@@ -106,29 +109,31 @@
   
     computed:{
 
-        
+      id(){
+          return this.$route.query.id
+        },
+
       treinoFilter(): TreinoExercicioModel[]{
         if(
           !this.searchQuery
         ){
           console.log("treinoExercicio DEntro do IF");
-          return this.treinoExer; 
+          return this.treinoExer.filter((ids: TreinoExercicioModel) =>{
+
+            const matchesQuerya = this.id
+              console.log("FIM DO ELSE");
+                return matchesQuerya;  
+          }); 
         } else{
           console.log("DENTRO DO ELSE");
           const lowerCaseQuery = this.searchQuery.toLowerCase();
-  
+          
           return this.treinoExer.filter((user: TreinoExercicioModel) => {
               const registerDate = new Date(user.dataCadastro);
   
-              const matchesQuery =
-                user.id.toString().trim().toLowerCase().includes(lowerCaseQuery) ||
-                user.idExercicio.nome.toLowerCase().includes(lowerCaseQuery) ||
-                user.idTreino.codigoOrdem.toLowerCase().includes(lowerCaseQuery) ||
-                user.idTreino.idUsuario.nome.toLowerCase().includes(lowerCaseQuery) ||
-                user.idExercicio.idGrupoMuscular.nome.toLowerCase().includes(lowerCaseQuery) ||
-                user.idTreino.idUsuario.id.toString().trim().toLowerCase().includes(lowerCaseQuery);
+              const matchesQuery = this.id
               console.log("FIM DO ELSE");
-                return matchesQuery;
+                return matchesQuery;  
             });
   
         }
@@ -144,6 +149,7 @@
     },
   
     methods: {
+
   
       async fetchUser() {
         try {

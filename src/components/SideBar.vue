@@ -35,13 +35,54 @@
         </a>
       </li>
       <li class="menu-opc text-center w-100">
-        <a class="menu-button" id="config-button-desk" href="#">
+        <a class="menu-button" href="/grupo-muscular">
+          <i class="bi bi-clipboard-fill fs-5"></i>
+          <span class="fw-semibold">GRUPO MUSCULAR</span>
+        </a>
+      </li>
+      <li class="menu-opc text-center w-100">
+        <a class="menu-button" id="config-button-desk" href="/entradasaida">
+          <i class="bi bi-alarm-fill"></i>
+          <span class="fw-semibold">ENTRADA&SAIDA</span>
+        </a>
+      </li>
+      <li class="menu-opc text-center w-100">
+        <button class="menu-button botaoConfig" id="config-button-desk" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <i class="bi bi-gear-fill fs-5"></i>
           <span class="fw-semibold">CONFIGURAÇÕES</span>
-        </a>
+        </button>
       </li>
     </ul>
   </nav>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">CONFIGURAÇÕES</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span class="textoConfig ">Horario de Entrada dos Funcionarios:</span>  07:30h
+        <br><br>
+        <span class="textoConfig">Horario de Entrada dos Clientes:</span>  08:30h
+        <br><br>
+        <span class="textoConfig">Ocupação MAXIMA:</span> 13 por hora
+        <br><br>
+        <span class="textoConfig"> Ocupação Previsivel:</span> <br>
+        <span class="config">     Segunda: 10 por hora</span> <br>
+        <span class="config">     Terça: 9 por hora</span> <br>
+        <span class="config">     Quarta: 11 por hora</span> <br>
+        <span class="config">     Quinta: 12 por hora</span> <br>
+        <span class="config">     Sexta: 9 por hora</span> <br>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </template>
 
 <style>
@@ -52,6 +93,21 @@
   position: fixed;
   background-color: #004777;
   transition: width 600ms ease;
+}
+
+.config{
+  margin-left: 5%;
+}
+
+.textoConfig{
+  font-weight:600;
+}
+
+.botaoConfig{
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    text-decoration: none;
 }
 
 .menu-contain {

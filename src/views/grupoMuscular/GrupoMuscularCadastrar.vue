@@ -139,6 +139,30 @@
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     },  
+
+    async onClickExcluir(){
+      console.log("Antes do metodo");
+      
+      GrupoMuscularClient.deletar(this.grupoMuscular.id)
+        .then(sucess => {
+          console.log("Depois");
+          this.grupoMuscular = new GrupoMuscularModel()
+          console.log(sucess);
+
+          this.mensagem.ativo = true;
+          this.mensagem.mensagem = sucess;
+          this.mensagem.titulo = "Exercicio Editado com sucesso!";
+          this.mensagem.css = "alert alert-success alert-dismissible fade show";
+         
+        })
+        .catch(error => {
+          console.log(error)
+          this.mensagem.ativo = true;
+          this.mensagem.mensagem = error;
+          this.mensagem.titulo = "Erro, não foi possivel editar o Exercicio ";
+          this.mensagem.css = "alert alert-danger alert-dismissible fade show";
+        });
+    },  
       //FIND BY ID
       //
 

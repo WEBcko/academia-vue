@@ -4,53 +4,55 @@
 
   <div class="container">
 
-    <div class="row text-start">
-      <h2 class="col-md-10">Lista de Clientes</h2>
+    <div class="row text-start align-items-center">
+      <h2 class="col-md-8">Lista de Clientes</h2>
+
+      <div class="header col-md-2">
+        <div class="search-container d-flex">
+          <input type="text" class="search-input btn" placeholder="Pesquisar por Nome/id ..." v-model="searchQuery" /> 
+          <i class="bi bi-search search-icon ms-3"></i>
+        </div>
+      </div>
+
       <router-link class="col-md-2 " to="/usuario-cadastrar" >
         <button type="button" class="btn btn-success offset-md-5">Cadastrar</button>
       </router-link>
     </div>
 
-    <div class="header d-flex align-content-start justify-content-between m-0">
-      <p class="title-pages">Pesquisar Usuario</p>
-      <div class="search-container">
-        <input type="text" class="search-input" placeholder="Pesquisar por Nome ..." v-model="searchQuery" />
-        <i class="bi bi-search search-icon"></i>
+    <div class="filter-container col-md-2">
+        <label for="user-filter">Role</label>
+        <select id="user-filter" v-model="selectedRole" class="form-select">
+          <option value="">All</option>
+          <option v-for="roles in availableRoles" :value="roles">{{ roles }}</option>
+        </select>
       </div>
-    </div>
 
-    <div class="filter-container d-flex align-items-center gap-2">
-      <label for="user-filter">Role</label>
-      <select id="user-filter" v-model="selectedRole" class="form-select">
-        <option value="">All</option>
-        <option v-for="roles in availableRoles" :value="roles">{{ roles }}</option>
-      </select>
-    </div>
+    
 
-    <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
+    <div class="border mt-4" style="border-radius: 20px;background-color: white;padding: 6px;">
       <table class="table">
         <thead>
           <tr>
             <th scope="col" class="p-2">ID</th>
             <th scope="col" class="p-2">Estado</th>
             <th scope="col" class="p-2 text-start">Nome do Usuario</th>
-            <th scope="col" class="p-2 text-start">Role</th>
-            <th scope="col colspan-2" class="p-2">Opção</th>
+            <th scope="col" class="p-2 ">Role</th>
+            <th scope="col" class="p-2 text-center">Opção</th>
           </tr>
         </thead>
 
         <tbody class="table-group-divider">
 
           <tr v-for="role in roleFilter" :key="role.id" class="col-md-12">
-            <td class="col-md-1">{{ role.id }}</td>
+            <td class="col-md-1" style="width: 4%;">{{ role.id }}</td>
             <th class="col-md-1">
               <span v-if="role.ativo" class="badge bg-primary text-align-center col"> ATIVO</span>
               <span v-if="!role.ativo" class="badge bg-danger text-align-center col"> INATIVO</span>
             </th>
-            <th class="col-md-1">{{ role.nome }}</th>
+            <th class="col-md-2 text-start">{{ role.nome }}</th>
             <th class="col-md-1">{{ role.role }}</th>
-            <th class="col-md-2">
-              <div class="btn-group" role="group">
+            <th class="col-md-3">
+              <div class="d-flex justify-content-center align-items-center" role="group">
                 <RouterLink type="button" class="btn text-align-center col-md-2 " v-if="role.role === 'CLIENTE'"
                   :to="{ name: 'usuario-treinoexercicio-view', query: { id: role.id, form: 'treinos' } }">
                   <span class="badge bg-success btn text-align-center col">TREINOS</span>
@@ -73,8 +75,15 @@
   </div>
 </template>
   
-<style scoped></style>
-  
+<style scoped>
+
+.search-input{
+  background-color: rgb(247, 247, 247);
+}
+
+</style>
+
+
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import axios from "axios";

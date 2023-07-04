@@ -12,7 +12,7 @@
         </router-link>  
     </div>
     
-    <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
+    <div class="border mt-4" style="border-radius: 20px;background-color: white;padding: 6px;">
     <table class="table">
     <thead>
       <tr >

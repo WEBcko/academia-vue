@@ -4,24 +4,25 @@
 
   <div class="container">
 
-    <div class="row text-start">
-      <h2 class="col-md-10">Lista de Treino-Exercicio</h2>
+    <div class="row text-start align-items-center">
+      <h2 class="col-md-7">Lista de Treino-Exercicio</h2>
+
+      <div class="header col-md-2">
+        <div class="search-container d-flex">
+          <input type="text" class="search-input" placeholder="Pesquisar Nome/id/usuario ..."
+            v-model="searchQuery" />
+          <i class="bi bi-search search-icon ms-2"></i>
+        </div>
+      </div>
+
       <router-link class="col-md-2 " to="/treinoexercicio-cadastrar">
-        <button type="button" class="btn btn-success offset-md-5">Cadastrar</button>
+        <button type="button" class="btn btn-success offset-md-4">Cadastrar</button>
       </router-link>
     </div>
 
-    <!-- Header -->
-    <div class="header d-flex align-content-start justify-content-between m-0">
-      <p class="title-pages">Pesquisar</p>
-      <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search By License Plate or names ..."
-          v-model="searchQuery" />
-        <i class="bi bi-search search-icon"></i>
-      </div>
-    </div>
+    
 
-    <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
+    <div class="border mt-4" style="border-radius: 20px;background-color: white;padding: 6px;">
       <table class="table">
         <thead>
           <tr>

@@ -6,7 +6,7 @@
   <div class="container col-md-8 corTabela"> 
 
     <div class="row align-items-center"> 
-      <h1 class="col mt-2">Cadastrar Usuario</h1>
+      <h1 class="col mt-2">Cadastrar Entrada e Saida</h1>
     </div>
 
     <div v-if="mensagem.ativo" class="row">
@@ -19,40 +19,33 @@
     </div>
 
     <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">Nome do Usuario:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.nome">
+      <label for="recipient-name" class=" row m-auto col-form-label">Entrada:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="entrada.horaEntrada">
     </div>
 
     <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">CPF:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.cpf">
-    </div>
-
-    <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">NUMERO:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.telefone">
-    </div>
-
-    <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">email:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.email">
-    </div>
-
-    <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">senha:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="usuario.senha">
+      <label for="recipient-name" class=" row m-auto col-form-label">Saida:</label>
+      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="entrada.horaSaida">
     </div>
     
     <div class="nome col">
-      <label for="recipient-name" class=" row m-auto col-form-label">Role:</label>
-      <select type="text" class="row ms-1" v-model="usuario.role">
-        <option v-for="item in availableRoles" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
-        :value="item">{{ item }}</option>
+      <label for="recipient-name" class=" row m-auto col-form-label">Cliente:</label>
+      <select type="text" class="row ms-1" v-model="entrada.idCliente">
+        <option v-for="item in usuario" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+        :value="item.role === 'CLIENTE'">{{ item.nome }}</option>
+      </select>
+    </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">Cliente:</label>
+      <select type="text" class="row ms-1" v-model="entrada.idPersonal">
+        <option v-for="item in usuario" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+        :value="item.role === 'PERSONAL'">{{ item.nome }}</option>
       </select>
     </div>
 
     <div class="col d-flex align-items-center justify-content-center">
-    <router-link class="col col-md-1" to="/usuario">
+    <router-link class="col col-md-1" to="/entradasaida">
         <button type="button" class="btn btn-success">Voltar</button>
     </router-link>
 
@@ -81,28 +74,22 @@
   
   import { defineComponent } from 'vue';
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
-  import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
-  import GrupoMuscularClient from '@/client/GrupoMuscularClient';
-  import { ExercicioModel } from '@/models/ExercicioModel';
-  import ExercicioCLient from '@/client/ExercicioCLient';
-
-  import  UsuarioClient  from '@/client/UsuarioClient';
-  import { UsuarioModel } from '@/models/UsuarioModel';
-  import { UsuarioRole } from '@/models/UsuarioRoleModel';
-
   import SideBar from '@/components/SideBar.vue';
+  
+  import { UsuarioModel } from '@/models/UsuarioModel';
+  import  UsuarioClient  from '@/client/UsuarioClient';
 
+  import { EntradaSaidaModel } from '@/models/EntradaSaidaModel';
+  import EntradaSaidaCLient from '@/client/EntradaSaidaCLient';
   
   export default defineComponent({
-    name: 'UsuarioCadastrar',
+    name: 'entradasaidaCadastrar',
     data() {
       return {
 
-        usuario: new UsuarioModel(),
-        selectedRole: null as UsuarioRole | null,
-
-        // usuarioRole: new 
-                
+        entrada: new EntradaSaidaModel(),
+        usuario: new Array<UsuarioModel>(),
+        
         mensagem: {
         ativo: false as boolean,
         titulo: "" as string,
@@ -121,28 +108,22 @@
     },
     form(){
       return this.$route.query.form
-    },
-
-    availableRoles(): string[] {
-      console.log("DENTRO DO AVELIABLE ROLES");
-      const roles = Object.values(UsuarioRole);
-      return roles.map((core) => core.toUpperCase());
-    },
+    }
   },
   mounted() {
     
     if(this.id !== undefined){
      this.findById(Number(this.id));
     }
- 
- },
 
+    this.findAllUsuario();   
+ },
  methods:{
     //FIND BY ID
     //
     findById(id: number){
-        UsuarioClient.findById(id).then(sucess =>{
-        this.usuario = sucess
+        EntradaSaidaCLient.findById(id).then(sucess =>{
+        this.entrada = sucess
           
     })
     .catch(error =>{
@@ -155,41 +136,57 @@
     })
     },
 
+    findAllUsuario(){
+      UsuarioClient.listAll().then(sucess =>{
+        this.usuario = sucess;
+        console.log(sucess);
+      })
+      .catch(error =>{
+          console.log(error)
+
+        })
+    },
+
     //CADASTRAR
     //
-    onClickCadastrar(){
-      UsuarioClient.cadastrar(this.usuario).then(sucess =>{
-            this.usuario = new UsuarioModel();
-            console.log("TA VINDOO");
-            console.log(sucess);
+    async onClickCadastrar(){
+
+          EntradaSaidaCLient.cadastrar(this.entrada).then(sucess =>{
+          this.entrada = new EntradaSaidaModel();
+          console.log(sucess);
+          console.log(this.entrada);
+          
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Usuario cadastrado com sucesso ";
+          this.mensagem.titulo = "entrada cadastrado com sucesso ";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
-      
         })
+        
         .catch(error =>{
           console.log(error)
+          console.log(this.entrada);
+          
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel Cadastrar o Usuario ";
+          this.mensagem.titulo = "Erro, não foi possivel Cadastrar o entrada ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         })
+          
     },
 
     onClickEditar(){
       console.log("Antes do metodo");
-      UsuarioClient.editar(this.usuario.id, this.usuario)
+      EntradaSaidaCLient.editar(this.entrada.id, this.entrada)
         .then(sucess => {
           console.log("Depois");
-          this.usuario = new UsuarioModel()
+          this.entrada = new EntradaSaidaModel()
           console.log(sucess);
 
           this.mensagem.ativo = true;
           this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Usuario Editado com sucesso!";
+          this.mensagem.titulo = "Entrada Editado com sucesso!";
           this.mensagem.css = "alert alert-success alert-dismissible fade show";
          
         })
@@ -197,7 +194,7 @@
           console.log(error)
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel editar o Usuario ";
+          this.mensagem.titulo = "Erro, não foi possivel editar o Entrada ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     },
@@ -205,29 +202,27 @@
     //EXCLUIR
     //
     onClickExcluir(){
+      EntradaSaidaCLient.deletar(this.entrada.id).then(sucess =>{
+            this.entrada = new EntradaSaidaModel();
 
-      console.log("Antes do metodo");
-      UsuarioClient.deletar(this.usuario.id)
-        .then(sucess => {
-          console.log("Depois");
-          this.usuario = new UsuarioModel()
-          console.log(sucess);
+            this.mensagem.ativo = true;
+            this.mensagem.mensagem = sucess;
+            this.mensagem.titulo = "Entrada Excluido com sucesso!";
+            this.mensagem.css = "alert alert-success alert-dismissible fade show";
 
-          this.mensagem.ativo = true;
-          this.mensagem.mensagem = sucess;
-          this.mensagem.titulo = "Usuario Deletado com sucesso!";
-          this.mensagem.css = "alert alert-success alert-dismissible fade show";
-         
+            //this.$router.push({name: 'marca-lista-view'})
         })
-        .catch(error => {
+        .catch(error =>{
           console.log(error)
+
           this.mensagem.ativo = true;
           this.mensagem.mensagem = error;
-          this.mensagem.titulo = "Erro, não foi possivel Deletar o Usuario ";
+          this.mensagem.titulo = "Erro, Não foi possivel excluir o Entrada";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
-        });
-
+        })
     },
+
+    
 
  }
   

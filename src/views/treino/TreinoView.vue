@@ -19,6 +19,7 @@
         <th scope="col" class="p-2">ID</th>
         <th scope="col" class="p-2">Estado</th>
         <th scope="col" class="p-2 text-start">Nome do Treino</th>
+        <th scope="col" class="p-2 text-start">Nome do Cliente</th>
         <th scope="col colspan-2" class="p-2">Opção</th>
       </tr>
     </thead>
@@ -27,11 +28,13 @@
     
         <tr v-for="item in treinoList" :key="item.id" class="col-md-12">
           <th class="col-md-1">{{ item.id }}</th>
+          
           <th class="col-md-1">
               <span v-if="item.ativo" class="badge bg-primary text-align-center col"> ATIVO</span> 
               <span v-if="!item.ativo" class="badge bg-danger text-align-center col"> INATIVO</span>
           </th>
           <th class="col-md-6 text-start">{{ item.codigoOrdem }}</th>
+          <th class="col-md-1">{{ item.idUsuario.nome }}</th>
           <th class="col-md-2">
             <div class="btn-group" role="group">
               <RouterLink type="button" class="btn text-align-center col-md-2" 

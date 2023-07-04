@@ -54,20 +54,10 @@ export default defineComponent({
             AuthClient.login(this.loginRequest).then(success => {
                 console.log(success)
 
-                const token = success; //1
-
-                 localStorage.setItem('userToken', token);//2
-
-                 //const tokenLocal = localStorage.getItem('userToken')//3
-
-                // Configure o cabeçalho de autorização com o token JWT
-                setAuthorizationHeader(token);//4
                 router.push('/dashboard');
             }).catch(error => {
                 return Promise.reject(error.response)
             })
-
-            router.push("/dashboard")
         }
 
     }

@@ -22,6 +22,16 @@
       <label for="recipient-name" class=" row m-auto col-form-label">Nome do Treino:</label>
       <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="treino.codigoOrdem">
     </div>
+
+    <div class="nome col">
+      <label for="recipient-name" class=" row m-auto col-form-label">Treino:</label>
+      <select type="text" class="row ms-1" v-model="treino.idUsuario">
+        <option v-for="item in user" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+          :value="item">{{ item.nome }}</option>
+      </select>
+    </div>
+
+    
   
     <div class="col d-flex align-items-center justify-content-center">
       <router-link class="col col-md-1" to="/treino">
@@ -52,12 +62,16 @@
   import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
   import { TreinoModel } from '@/models/TreinoModel';
   import TreinoClient from '@/client/TreinoClient';
+  import { UsuarioModel } from '@/models/UsuarioModel';
+import UsuarioClient from '@/client/UsuarioClient';
 
   export default defineComponent({
     name: 'TreinoCadastrar',
     data() {
       return {
         treino: new TreinoModel(),
+        user: new Array<UsuarioModel>(),
+        
         mensagem: {
           ativo: false as boolean,
           titulo: "" as string,
@@ -78,12 +92,26 @@
       
        if(this.id !== undefined){
         this.findById(Number(this.id));
-       }   
+       }
+       
+       this.findAllUsuario()
     },
     components: {
       NavBar,
     },
     methods:{
+
+      findAllUsuario(){
+      UsuarioClient.listAll().then(sucess => {
+        this.user = sucess;
+        console.log(sucess);
+      })
+        .catch(error => {
+          console.log(error)
+
+        })
+
+    },
   
       //CADASTRAR
       //

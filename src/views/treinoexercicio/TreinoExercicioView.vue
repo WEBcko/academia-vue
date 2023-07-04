@@ -13,7 +13,7 @@
 
     <!-- Header -->
     <div class="header d-flex align-content-start justify-content-between m-0">
-      <p class="title-pages">Access : Vehicles</p>
+      <p class="title-pages">Pesquisar</p>
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search By License Plate or names ..."
           v-model="searchQuery" />
@@ -28,6 +28,7 @@
             <th scope="col" class="p-2">ID</th>
             <th scope="col" class="p-2">Estado</th>
             <th scope="col" class="p-2 text-start">Treino</th>
+            <th scope="col" class="p-2 text-start">Cliente</th>
             <th scope="col" class="p-2 text-start">Exercicio</th>
             <th scope="col" class="p-2 text-start">Dificuldade</th>
             <th scope="col" class="p-2 text-start">Peso</th>
@@ -45,6 +46,7 @@
               <span v-if="!item.ativo" class="badge bg-danger text-align-center col"> INATIVO</span>
             </th>
             <th class="col-md-6 text-start">{{ item.idTreino.codigoOrdem }}</th>
+            <th class="col-md-1"> {{ item.idTreino.idUsuario.nome }}</th>
             <th class="col-md-1"> {{ item.idExercicio.nome }}</th>
             <th class="col-md-1"> {{ item.dificuldade }}</th>
             <th class="col-md-1"> {{ item.peso }}</th>
@@ -95,6 +97,7 @@ export default defineComponent({
   },
   mounted() {
     this.fetchUser();
+
   },
   components: {
     NavBar,
@@ -117,13 +120,16 @@ export default defineComponent({
 
             const matchesQuery =
               user.id.toString().trim().toLowerCase().includes(lowerCaseQuery) ||
-              user.idExercicio.nome.toLowerCase().includes(lowerCaseQuery);
-  
+              user.idExercicio.nome.toLowerCase().includes(lowerCaseQuery) ||
+              user.idTreino.codigoOrdem.toLowerCase().includes(lowerCaseQuery) ||
+              user.idTreino.idUsuario.nome.toLowerCase().includes(lowerCaseQuery) ||
+              user.idExercicio.idGrupoMuscular.nome.toLowerCase().includes(lowerCaseQuery);
             console.log("FIM DO ELSE");
               return matchesQuery;
           });
 
       }
+
     },
 
     availableRoles(): string[] {

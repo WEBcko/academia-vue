@@ -1,6 +1,7 @@
 <template>
 
     <NavBar></NavBar>
+    <SideBar></SideBar>
   
   <div class="container col-md-8 corTabela"> 
 
@@ -89,6 +90,8 @@
   import { UsuarioModel } from '@/models/UsuarioModel';
   import { UsuarioRole } from '@/models/UsuarioRoleModel';
 
+  import SideBar from '@/components/SideBar.vue';
+
   
   export default defineComponent({
     name: 'UsuarioCadastrar',
@@ -110,6 +113,7 @@
     },
     components: {
       NavBar,
+      SideBar
     },
     computed: {
     id(){

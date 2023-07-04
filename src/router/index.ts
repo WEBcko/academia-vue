@@ -121,8 +121,18 @@ const routes: Array<RouteRecordRaw> = [
         path: '/usuario-cadastrar',
         name: 'usuario-cadastrar-excluir-view',
         component: () => import(/* webpackChunkName: "about" */ '../views/usuario/ClienteCadastrar.vue'),
-      },
+      },  
     ]
+  },
+  {
+    path: '/usuario-treinoexercicio',
+    name: 'usuario-treinoexercicio-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/treinoexercicio/TreinoExercicioTESTE.vue'),
+  },
+  {
+    path: '/usuario-treino',
+    name: 'usuario-treino-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/treino/TreinoView.vue'),
   },
   {
     path: '/treinoexercicio',

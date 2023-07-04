@@ -6,7 +6,7 @@
 
     <div class="row text-start">
       <h2 class="col-md-10">Lista de Clientes</h2>
-      <router-link class="col-md-2 " to="/usuario-cadastrar">
+      <router-link class="col-md-2 " to="/usuario-cadastrar" >
         <button type="button" class="btn btn-success offset-md-5">Cadastrar</button>
       </router-link>
     </div>
@@ -51,6 +51,10 @@
             <th class="col-md-1">{{ role.role }}</th>
             <th class="col-md-2">
               <div class="btn-group" role="group">
+                <RouterLink type="button" class="btn text-align-center col-md-2 " v-if="role.role === 'CLIENTE'"
+                  :to="{ name: 'usuario-treinoexercicio-view', query: { id: role.id, form: 'treinos' } }">
+                  <span class="badge bg-success btn text-align-center col">TREINOS</span>
+                </RouterLink>
                 <RouterLink type="button" class="btn text-align-center col-md-2"
                   :to="{ name: 'usuario-cadastrar-editar-view', query: { id: role.id, form: 'editar' } }">
                   <span class="badge bg-warning btn text-align-center col">EDITAR</span>

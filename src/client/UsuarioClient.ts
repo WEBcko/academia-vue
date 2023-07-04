@@ -14,7 +14,7 @@ export class UsuarioClient{
     constructor(){
         this.axiosClient = axios.create({
             baseURL:"http://localhost:8080/api/usuario",
-            headers: {'Content-type' : 'application/json', 'Authorization' : `Bearer ${localStorage.getItem('userToken')}`},
+            headers: {'Content-type' : 'application/json'},
         
             //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         });
@@ -49,7 +49,7 @@ export class UsuarioClient{
 
     public async editar(id : number, usuarioModel : UsuarioModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put<string>(`/${id}`, usuarioModel)).data
+            return (await this.axiosClient.put<string>(`/editar/${id}`, usuarioModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }

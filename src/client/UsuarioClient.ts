@@ -6,7 +6,7 @@ import { PageResponse } from '@/models/page-response';
 
 import axios, {AxiosInstance} from 'axios';
 
-class UsuarioClient{
+export class UsuarioClient{
     public token = localStorage.getItem('userToken');
 
     private axiosClient : AxiosInstance;

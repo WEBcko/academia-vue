@@ -59,11 +59,11 @@ export default defineComponent({
 
                  localStorage.setItem('userToken', token);//2
 
-                 const tokenLocal = localStorage.getItem('userToken')//3
+                 //const tokenLocal = localStorage.getItem('userToken')//3
 
                 // Configure o cabeçalho de autorização com o token JWT
-                //setAuthorizationHeader(token);//4
-
+                setAuthorizationHeader(token);//4
+                router.push('/dashboard');
             }).catch(error => {
                 return Promise.reject(error.response)
             })

@@ -1,4 +1,9 @@
 import { UsuarioModel } from '@/models/UsuarioModel';
+// import { PageRequest } from "@/model/page-request";
+// import { PageResponse } from "@/model/page-response";
+import { PageRequest } from '@/models/page-request';
+import { PageResponse } from '@/models/page-response';
+
 import axios, {AxiosInstance} from 'axios';
 
 class UsuarioClient{
@@ -14,6 +19,7 @@ class UsuarioClient{
             //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         });
     }
+
 
     public async findById(id : number) : Promise<UsuarioModel>{
         try{
@@ -56,6 +62,15 @@ class UsuarioClient{
             return Promise.reject(error.response)
         }
     }
+
+    public async findByFiltrosPaginado(pageRequest: PageRequest): Promise<PageResponse<UsuarioModel>> {
+		try {
+
+			return (await this.axiosClient.get<PageResponse<UsuarioModel>>(`/role`)).data
+		} catch (error:any) { 
+			return Promise.reject(error.response) 
+		}
+	}
 }
 
 export default new UsuarioClient();

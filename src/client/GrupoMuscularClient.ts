@@ -1,9 +1,9 @@
 import { GrupoMuscularModel } from '@/models/GrupoMuscularModel';
 import axios, {AxiosInstance} from 'axios';
-import setAuthorizationHeader from '@/configs-axios/axios-config';
+import { PageRequest } from '@/models/page-request';
+import { PageResponse } from '@/models/page-response';
 
-class GrupoMuscularClient{
-    public token = localStorage.getItem('userToken');
+export class GrupoMuscularClient{
 
     private axiosClient : AxiosInstance;
 
@@ -36,15 +36,15 @@ class GrupoMuscularClient{
 
     public async cadastrar(grupoMuscularModel : GrupoMuscularModel) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', grupoMuscularModel)).data
+            return (await this.axiosClient.post('', grupoMuscularModel)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
     }
 
-    public async editar( grupoMuscular : GrupoMuscularModel) : Promise<GrupoMuscularModel>{
+    public async editar(id: number, grupoMuscular : GrupoMuscularModel) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${grupoMuscular.id}`, grupoMuscular)).data
+            return (await this.axiosClient.put<string>(`/${id}`, grupoMuscular)).data
         }catch(error:any){
             return Promise.reject(error.response);
         }
@@ -57,6 +57,15 @@ class GrupoMuscularClient{
             return Promise.reject(error.response)
         }
     }
+
+    public async findByFiltrosPaginado(pageRequest: PageRequest): Promise<PageResponse<GrupoMuscularModel>> {
+		try {
+
+			return (await this.axiosClient.get<PageResponse<GrupoMuscularModel>>(`/role`)).data
+		} catch (error:any) { 
+			return Promise.reject(error.response) 
+		}
+	}
 
 
 }

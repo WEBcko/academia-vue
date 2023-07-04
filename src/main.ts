@@ -5,7 +5,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import 'bootstrap';
-import axios from '@/configs-axios/axios-config';
+import axios from '@/client/axios-config';
 import  Vue  from 'vue';
 
 

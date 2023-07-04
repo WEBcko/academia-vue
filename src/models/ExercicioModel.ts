@@ -7,8 +7,4 @@ export class ExercicioModel extends AbstractEntity{
     idGrupoMuscular! : GrupoMuscularModel
     nome! : string
 
-    constructor(){
-        super();
-        this.ativo=true;
-    }
 }

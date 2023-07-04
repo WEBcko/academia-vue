@@ -1,14 +1,11 @@
 <template>
-  
-  <router-view/>
+  <router-view />
 </template>
 
 <style lang="scss">
-
-  .w-10 {
-    width: 10%;
-  }
-
+.w-10 {
+  width: 10%;
+}
 
 </style>
 

@@ -1,12 +1,7 @@
 <template>
   <SideBar></SideBar>
 
-<nav class="navbar navbar-expand-lg  navBar-Dash">
-  <div class="container-fluid fs-5 navBar-Dash">
-    <span class="col-md-10 text-start" > Olá, admin</span>
-    <span class="text-end">Quinta-feira, 20 de Outubro</span>
-  </div>
-</nav>
+  <NavBar></NavBar>
 
 <div class="tela col-md-11 offset-md-1">
   <div class="conteudo-Dash row mt-5 ms-5">

@@ -2,18 +2,18 @@
     <div class="row">
         <div class="col-12 col-sm-6">
             <div class="row">
-                <div class="col d d-flex align-items-center justify-content-center">
+                <div class="col d d-flex align-items-center justify-content-center ">
                     <div class="d-flex  align-items-start flex-column w-75 h-50">
-                        <h1>LOGIN</h1>
+                        <h1 class="text-white">LOGIN</h1>
 
                         <form class="f">
                             <div class="mb-3 ">
-                                <label for="exampleInputEmail1" class="form-label">Username</label>
+                                <label for="exampleInputEmail1" class="form-label text-white">Username</label>
                                 <input v-model="loginRequest.username" type="text" placeholder="Seu Username"
                                     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3 ">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <label for="exampleInputPassword1" class="form-label text-white">Password</label>
                                 <input v-model="loginRequest.senha" type="password" placeholder="Sua Senha"
                                     class="form-control" id="exampleInputPassword1">
                             </div>
@@ -39,7 +39,7 @@ import { defineComponent } from 'vue';
 import UsuarioClient from '@/client/UsuarioClient';
 import { LoginRequest } from '@/models/LoginRequestModel';
 import AuthClient from "@/client/AuthClient";
-import setAuthorizationHeader  from "@/client/axios-config";
+import setAuthorizationHeader from "@/client/axios-config";
 import router from '@/router';
 export default defineComponent({
     name: 'LoginView',
@@ -68,7 +68,11 @@ export default defineComponent({
 .d {
     height: 100vh;
     width: 45vw;
-    background-color: #236F5C;
+    background-color: #004777;
+}
+
+::placeholder {
+  opacity: 0.5;
 }
 
 .a {

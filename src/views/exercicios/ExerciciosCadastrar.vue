@@ -19,13 +19,13 @@
 
     <div class="nome col">
       <label for="recipient-name" class=" row m-auto col-form-label">Nome do Exercicio:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="exercicio.nome">
+      <input type="text" :disabled="form === 'excluir' ? true : false" class="form-control" v-model="exercicio.nome">
     </div>
     
     <div class="nome col">
       <label for="recipient-name" class=" row m-auto col-form-label">Grupo Muscular:</label>
       <select type="text" class="row ms-1" v-model="exercicio.idGrupoMuscular">
-        <option v-for="item in grupoMuscular" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+        <option v-for="item in grupoMuscular" :disabled="form === 'excluir' ? true : false" class="form-control"
         :value="item">{{ item.nome }}</option>
       </select>
     </div>
@@ -35,9 +35,9 @@
         <button type="button" class="btn btn-success">Voltar</button>
     </router-link>
 
-    <button type="button" v-if="this.form === undefined" class="btn btn-success mt-2 mb-2" @click="onClickCadastrar()"> Cadastrar</button>
-    <button type="button" v-if="this.form === 'editar'" class="btn btn-warning mt-2 mb-2" @click="onClickEditar()"> Editar</button>
-    <button type="button" v-if="this.form === 'excluir'" class="btn btn-danger mt-2 mb-2" @click="onClickExcluir()"> Excluir</button>
+    <button type="button" v-if="form === undefined" class="btn btn-success mt-2 mb-2" @click="onClickCadastrar()"> Cadastrar</button>
+    <button type="button" v-if="form === 'editar'" class="btn btn-warning mt-2 mb-2" @click="onClickEditar()"> Editar</button>
+    <button type="button" v-if="form === 'excluir'" class="btn btn-danger mt-2 mb-2" @click="onClickExcluir()"> Excluir</button>
   </div>
 
 
@@ -73,7 +73,6 @@
       return {
         exercicio: new ExercicioModel(),
         grupoMuscular: new Array<GrupoMuscularModel>(),
-        
         mensagem: {
         ativo: false as boolean,
         titulo: "" as string,

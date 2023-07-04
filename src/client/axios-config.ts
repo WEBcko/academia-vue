@@ -26,4 +26,3 @@ const setAuthorizationHeader = (token: string) => {
 };
 
 export default setAuthorizationHeader;
-

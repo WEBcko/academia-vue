@@ -147,6 +147,11 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
 
+  {
+    path: '/teste',
+    name: 'teste-vue',
+    component: () => import(/* webpackChunkName: "about" */ '../views/usuario/teste.vue')
+  },
 
 ]
 

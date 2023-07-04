@@ -40,7 +40,6 @@
               </RouterLink>
               <RouterLink type="button" class="btn text-align-center col-md-2" 
                 :to="{name: 'treino-cadastrar-excluir-view', query: {id: item.id, form: 'excluir'}}">
-
                 <span class="badge bg-danger btn text-align-center col">EXCLUIR</span>
               </RouterLink>
             </div>

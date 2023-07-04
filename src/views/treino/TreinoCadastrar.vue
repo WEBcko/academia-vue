@@ -20,8 +20,7 @@
   
     <div class="nome col">
       <label for="recipient-name" class=" row m-auto col-form-label">Nome do Treino:</label>
-      <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="treino.codigoOrdem">
-
+      <input type="text" :disabled="form === 'excluir' ? true : false" class="form-control" v-model="treino.codigoOrdem">
     </div>
   
     <div class="col d-flex align-items-center justify-content-center">
@@ -29,9 +28,9 @@
           <button type="button" class="btn btn-success">Voltar</button>
       </router-link>
   
-      <button type="button" v-if="this.form === undefined" class="btn btn-success mt-2 mb-2" @click="onClickCadastrar()"> Cadastrar</button>
-      <button type="button" v-if="this.form === 'editar'" class="btn btn-warning mt-2 mb-2" @click="onClickEditar()"> Editar</button>
-      <button type="button" v-if="this.form === 'excluir'" class="btn btn-danger mt-2 mb-2" @click="onClickExcluir()"> Excluir</button>
+      <button type="button" v-if="form === undefined" class="btn btn-success mt-2 mb-2" @click="onClickCadastrar()"> Cadastrar</button>
+      <button type="button" v-if="form === 'editar'" class="btn btn-warning mt-2 mb-2" @click="onClickEditar()"> Editar</button>
+      <button type="button" v-if="form === 'excluir'" class="btn btn-danger mt-2 mb-2" @click="onClickExcluir()"> Excluir</button>
     </div>
   </div>
   </template>

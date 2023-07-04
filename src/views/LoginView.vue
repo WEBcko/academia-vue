@@ -1,28 +1,30 @@
 <template>
     <div class="row">
         <div class="col-12 col-sm-6">
-                <div class="row">
-                    <div class="col d d-flex align-items-center justify-content-center">
-                        <div class="d-flex  align-items-start flex-column w-75 h-50">
-                            <h1>LOGIN</h1>
-                          
-                            <form class="f">
-                                <div class="mb-3 ">
-                                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                                    <input v-model="loginRequest.username"  type="email" placeholder="Seu email" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3 ">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input v-model="loginRequest.senha" type="password" placeholder="Sua Senha" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="mb-3 d-flex justify-content-evenly">
-                                    <button type="submit" class="btn btn-light" @click="onClickLogin()">Entrar</button>
-                                    <RouterLink to="/cadastrar" type="button" class="btn btn-success">Cadastrar</RouterLink>
-                                </div>
-                            </form>
-                        </div>
+            <div class="row">
+                <div class="col d d-flex align-items-center justify-content-center">
+                    <div class="d-flex  align-items-start flex-column w-75 h-50">
+                        <h1>LOGIN</h1>
+
+                        <form class="f">
+                            <div class="mb-3 ">
+                                <label for="exampleInputEmail1" class="form-label">Username</label>
+                                <input v-model="loginRequest.username" type="text" placeholder="Seu Username"
+                                    class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3 ">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input v-model="loginRequest.senha" type="password" placeholder="Sua Senha"
+                                    class="form-control" id="exampleInputPassword1">
+                            </div>
+                            <div class="mb-3 d-flex justify-content-evenly">
+                                <button type="submit" class="btn btn-success"
+                                    @click.prevent="onClickLogin()">Entrar</button>
+                                <RouterLink to="/cadastrar" type="button" class="btn btn-light">Cadastrar</RouterLink>
+                            </div>
+                        </form>
                     </div>
+                </div>
             </div>
         </div>
         <div class="a col col-sm-6">
@@ -38,31 +40,36 @@ import UsuarioClient from '@/client/UsuarioClient';
 import { LoginRequest } from '@/models/LoginRequestModel';
 import AuthClient from "@/client/AuthClient";
 import setAuthorizationHeader  from "@/client/axios-config";
-
+import router from '@/router';
 export default defineComponent({
     name: 'LoginView',
     data() {
         return {
-            loginRequest : new LoginRequest()
+            loginRequest: new LoginRequest()
 
         }
     },
     methods: {
         onClickLogin() {
-            AuthClient.login(this.loginRequest).then(success =>{
-                // console.log(success);
+            AuthClient.login(this.loginRequest).then(success => {
+                console.log(success)
 
-                   // Realize a autenticação e obtenha o token JWT
-                    const token = success; // Substitua com o seu token JWT
+                const token = success; //1
 
-                    // Configure o cabeçalho de autorização com o token JWT
-                    setAuthorizationHeader(token);
+                 localStorage.setItem('userToken', token);//2
 
+                 //const tokenLocal = localStorage.getItem('userToken')//3
 
-            }).catch(error =>{
+                // Configure o cabeçalho de autorização com o token JWT
+                setAuthorizationHeader(token);//4
+                router.push('/dashboard');
+            }).catch(error => {
                 return Promise.reject(error.response)
             })
+
+            router.push("/dashboard")
         }
+
     }
 });
 </script>
@@ -92,8 +99,8 @@ export default defineComponent({
 }
 
 
-@media (max-width:425px){
-    .d{
+@media (max-width:425px) {
+    .d {
         background-color: #236F5C;
     }
 }

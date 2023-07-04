@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    redirect:"/login"
   },
   {
     path: '/dashboard',
@@ -56,7 +56,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'edit-grupoMuscular',
     component: () => import('../views/grupoMuscular/GrupoMuscularEditar.vue')
   },
-
 
   {
     path: '/exercicio',

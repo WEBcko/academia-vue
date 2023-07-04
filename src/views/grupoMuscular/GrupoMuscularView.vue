@@ -11,7 +11,6 @@
       </router-link>
     </div>
 
-
     <div class="header d-flex align-content-start justify-content-between m-0">
       <p class="title-pages">Grupo Muscular</p>
       <div class="search-container">

@@ -19,3 +19,5 @@ class CadastrarClient{
         }
     }
 }
+
+export default new CadastrarClient();

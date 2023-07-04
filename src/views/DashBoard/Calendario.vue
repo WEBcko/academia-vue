@@ -61,6 +61,7 @@ export default defineComponent({
       calendarApi.unselect() // clear date selection
 
       if (title) {
+        calendarApi.
         calendarApi.addEvent({
           id: createEventId(),
           title,

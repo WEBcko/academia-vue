@@ -1,10 +1,7 @@
-
-
-
-
 <template>
 
     <NavBar></NavBar>
+    <SideBar></SideBar>
     
     <div class="container">
     
@@ -43,7 +40,6 @@
               </RouterLink>
               <RouterLink type="button" class="btn text-align-center col-md-2" 
                 :to="{name: 'treino-cadastrar-excluir-view', query: {id: item.id, form: 'excluir'}}">
-
                 <span class="badge bg-danger btn text-align-center col">EXCLUIR</span>
               </RouterLink>
             </div>
@@ -63,12 +59,14 @@
     import NavBar from '@/components/NavBar.vue';
     import { TreinoModel } from '@/models/TreinoModel';
     import TreinoClient from '@/client/TreinoClient';
+    import SideBar from '@/components/SideBar.vue';
     
     
     export default defineComponent({
         name:"TreinoView",
         components: {
-        NavBar
+        NavBar,
+        SideBar
         },
         data(){
             return{

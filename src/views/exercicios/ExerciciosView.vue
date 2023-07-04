@@ -1,5 +1,5 @@
 <template>
-
+    <SideBar></SideBar>
     <NavBar></NavBar>
   
   <div class="container">
@@ -34,7 +34,6 @@
       <tbody class="table-group-divider">
   
         <tr v-for="item in roleFilter" :key="item.id" class="col-md-12">
-
           <th class="col-md-1">{{ item.id }}</th>
           <th class="col-md-1">
               <span v-if="item.ativo" class="badge bg-primary text-align-center col"> ATIVO</span> 
@@ -72,8 +71,8 @@
   import { ExercicioClient } from '@/client/ExercicioCLient';
   import { PageResponse } from '@/models/page-response';
   import { PageRequest } from '@/models/page-request';
-
   import NavBar from '@/components/NavBar.vue';
+  import SideBar from '@/components/SideBar.vue';
 
   
   export default defineComponent({
@@ -87,10 +86,10 @@
     },
     mounted(){
       this.fetchUser();
-
     },
     components: {
       NavBar,
+      SideBar,
     },
     computed:{
       roleFilter(): ExercicioModel[] {

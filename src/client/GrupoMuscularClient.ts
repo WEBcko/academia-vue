@@ -10,7 +10,9 @@ export class GrupoMuscularClient{
     constructor(){
         this.axiosClient = axios.create({
             baseURL:"http://localhost:8080/api/grupo",
-            headers: {'Content-type' : 'application/json'}
+            headers: {'Content-type' : 'application/json','Authorization' : `Bearer ${localStorage.getItem('userToken')}`,
+            "Access-Control-Allow-Origin": "http://localhost:8080","Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,},
+            
         });
     }
 
@@ -23,7 +25,9 @@ export class GrupoMuscularClient{
     }
 
     public async listAll(): Promise<GrupoMuscularModel[]>{
-        try{
+        try{    
+            //  const token = localStorage.getItem('userToken')
+            //  setAuthorizationHeader(String(token));
             return (await this.axiosClient.get<GrupoMuscularModel[]>("/lista")).data
         }catch(error:any){
             return Promise.reject(error.response);

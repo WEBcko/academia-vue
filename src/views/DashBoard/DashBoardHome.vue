@@ -7,11 +7,12 @@
   <div class="conteudo-Dash row mt-5 ms-5">
 
     <div class="col-md-9 conteudo">
-      <full-calendar  class="calendario" v-show="calendarioAtivar"></full-calendar>
+      <full-calendar  class="calendario" ></full-calendar>
       <formulario  v-show="formularioAtivar"> </formulario>
       
 
     </div>
+    <!-- v-show="calendarioAtivar" -->
     <!-- v-if="calendarioAtivar" -->
     <!-- v-if="formularioAtivar" -->
    

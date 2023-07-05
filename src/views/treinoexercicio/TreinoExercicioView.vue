@@ -5,40 +5,40 @@
   <div class="container">
 
     <div class="row text-start align-items-center">
-      <h2 class="col-md-7">Lista de Treino-Exercicio</h2>
+      <h2 class="col-md-8">Lista de Treino-Exercicio</h2>
 
       <div class="header col-md-2">
         <div class="search-container d-flex">
-          <input type="text" class="search-input" placeholder="Pesquisar Nome/id/usuario ..."
+          <input type="text" class="search-input btn botao-Cor" placeholder="Pesquisar Nome/id/usuario ..."
             v-model="searchQuery" />
           <i class="bi bi-search search-icon ms-2"></i>
         </div>
       </div>
 
       <router-link class="col-md-2 " to="/treinoexercicio-cadastrar">
-        <button type="button" class="btn btn-success offset-md-4">Cadastrar</button>
+        <button type="button" class="btn btn-success offset-md-6">Cadastrar</button>
       </router-link>
     </div>
 
     
 
-    <div class="border mt-4" style="border-radius: 20px;background-color: white;padding: 6px;">
+    <div class="border mt-4" style="border-radius: 20px;background-color: white;">
       <table class="table">
-        <thead>
-          <tr>
-            <th scope="col" class="p-2">ID</th>
-            <th scope="col" class="p-2">Estado</th>
+        <thead class="corhead table-dark" style="border-radius: 20px;">
+          <tr class="">
+            <th scope="col" class="p-2 thCima">ID</th>
+            <th scope="col" class="p-2 ">Estado</th>
             <th scope="col" class="p-2 text-start">Treino</th>
             <th scope="col" class="p-2 text-start">Cliente</th>
             <th scope="col" class="p-2 text-start">Exercicio</th>
             <th scope="col" class="p-2 text-start">Dificuldade</th>
             <th scope="col" class="p-2 text-start">Peso</th>
             <th scope="col" class="p-2 text-start">Serie</th>
-            <th scope="col colspan-2" class="p-2">Opção</th>
+            <th scope="col thBaixo colspan-2" class="p-2 thBaixo">Opção</th>
           </tr>
         </thead>
 
-        <tbody class="table-group-divider">
+        <tbody class="">
 
           <tr v-for="item in treinoFilter" :key="item.id" class="col-md-12">
             <th class="col-md-1">{{ item.id }}</th>
@@ -46,7 +46,7 @@
               <span v-if="item.ativo" class="badge bg-primary text-align-center col"> ATIVO</span>
               <span v-if="!item.ativo" class="badge bg-danger text-align-center col"> INATIVO</span>
             </th>
-            <th class="col-md-6 text-start">{{ item.idTreino.codigoOrdem }}</th>
+            <th class="col-md-20 text-start">{{ item.idTreino.codigoOrdem }}</th>
             <th class="col-md-1"> {{ item.idTreino.idUsuario.nome }}</th>
             <th class="col-md-1"> {{ item.idExercicio.nome }}</th>
             <th class="col-md-1"> {{ item.dificuldade }}</th>
@@ -72,7 +72,44 @@
   </div>
 </template>
   
-<style scoped></style>
+<style scoped>
+
+.thCima {
+    -moz-border-radius-topleft: 20px;
+    -webkit-border-top-left-radius: 20px;
+
+}
+
+.botao-Cor{
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(128, 128, 128);
+  border-style: solid;
+}
+
+.thBaixo {
+    -moz-border-radius-topright: 20px;
+    -webkit-border-top-right-radius: 20px;
+
+}
+
+
+.table-dark {
+  --bs-table-color: #fff;
+  --bs-table-bg: #004777;
+  --bs-table-border-color: #004777;
+  --bs-table-striped-bg: #004777;
+  --bs-table-striped-color: #fff;
+  --bs-table-active-bg: #004777;
+  --bs-table-active-color: #fff;
+  --bs-table-hover-bg: #004777;
+  --bs-table-hover-color: #fff;
+  color: var(--bs-table-color);
+  border-color: #004777;
+  border-radius: 30px;
+}
+
+
+</style>
   
 <script lang="ts">
 import { defineComponent } from 'vue';
